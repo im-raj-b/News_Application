@@ -4,7 +4,7 @@ import Tabs from "./Tabs";
 export default function NewsCards({ newsData }) {
   return (
     <>
-      <div className="grid grid-cols-4 gap-4 relative top-20">
+      <div className="h-screen grid lg:grid-cols-4 gap-5 md:grid-cols-2 sm:grid-cols-1 items-center relative top-20">
         {newsData.map((ele) => {
           // console.log(ele, "got it");
           return (
@@ -30,7 +30,12 @@ const NewsCard = function ({ data }) {
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4 my-4">
       <a href="#">
-        <img className="rounded-t-lg" src={data.urlToImage} alt="" />
+        <img
+          className="rounded-t-lg"
+          src={data.urlToImage}
+          alt=""
+          loading="lazy"
+        />
       </a>
       <div className="p-5">
         <a href="#">

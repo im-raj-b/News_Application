@@ -17,13 +17,16 @@ function App() {
   }, []);
 
   async function getCountries() {
-    const { data } = await supabase.from("NewsData").select("responseData");
+    const { data } = await supabase
+      .from("NewsData")
+      .select("dataUS")
+      .not("dataUS", "is", null);
     // setCount(data);
 
     data.forEach((ele) => {
-      if (ele.responseData) {
+      if (ele.dataUS) {
         // console.log(ele.responseData.articles);
-        finalArray.push(ele.responseData);
+        finalArray.push(ele.dataUS);
       }
     });
     // const dataNews = finalArray.filter((ele) => ele);

@@ -23,10 +23,16 @@ export default function NavBar() {
     setDarkMode(!darkMode);
   };
 
+  const changeCategory = (e) => {
+    const dropDownEle = document.querySelector(".category-drop");
+    dropDownEle.classList.toggle("hidden");
+    // console.log(e);
+  };
+
   const changeCountry = (e) => {
     const dropDownEle = document.querySelector(".country-drop");
     dropDownEle.classList.toggle("hidden");
-    console.log(e);
+    // console.log(e);
   };
 
   const selectCountry = (e) => {
@@ -77,15 +83,10 @@ export default function NavBar() {
                 </svg>
               </button>
             </div>
+            <div className="flex flex-shrink-0 items-center ml-12">
+              <img className="h-8 w-auto" src={news} alt="Your Company" />
+            </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="flex flex-shrink-0 items-center">
-                <img
-                  className="h-8 w-auto"
-                  // src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                  src={news}
-                  alt="Your Company"
-                />
-              </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   <a
@@ -118,7 +119,7 @@ export default function NavBar() {
                       id="dropdownNavbarLink"
                       data-dropdown-toggle="dropdownNavbar"
                       className="flex items-center justify-between w-full py-2 pl-3 pr-4bg-gray-900 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 text-sm font-medium"
-                      onClick={changeCountry}
+                      onClick={changeCategory}
                     >
                       Categories{" "}
                       <svg
@@ -139,7 +140,7 @@ export default function NavBar() {
                     </button>
                     <div
                       id="dropdownNavbar"
-                      className="country-drop group-hover:block hidden absolute left-50 z-10 mt-2 origin-top-right font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+                      className="category-drop group-hover:block hidden absolute left-50 z-10 mt-2 origin-top-right font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
                     >
                       <ul
                         className="py-2 text-sm text-gray-700 dark:text-gray-400"
@@ -246,9 +247,9 @@ export default function NavBar() {
                 </span>
               </div>
               <div className="relative ml-8">
-                <div className="flex items-center md:order-2 group focus:outline-none">
+                <div className="flex items-center md:order-2 focus:outline-none">
                   <button
-                    // onClick={changeCountry}
+                    onClick={changeCountry}
                     type="button"
                     data-dropdown-toggle="language-dropdown-menu"
                     className="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -296,10 +297,11 @@ export default function NavBar() {
 
                   <div
                     // className="group-hover:block z-10 mt-20 absolute hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
-                    className="country-drop group-hover:block hidden absolute left-50 z-10 mt-2 origin-top-right font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+                    className="country-drop md:order-2 hidden absolute left-50 z-10 mt-12 origin-top-right font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+                    // className="country-drop mt-12 z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
                     id="language-dropdown-menu"
                   >
-                    <ul className="py-2 font-medium top-0" role="none">
+                    <ul className="py-2 font-medium mt-12" role="none">
                       <li>
                         <a
                           href="#"
