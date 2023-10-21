@@ -11,4 +11,15 @@
         m-0 
         shadow-lg;
   }
+
+  /* @media (min-width: 640px) {
+    .news-sm-modal {
+      margin-top: 40px;
+      @apply absolute z-50 top-[15px] bottom-0 left-0;
+    }
+  } */
+
+  .nw-width {
+    width: 140px;
+  }
 }
