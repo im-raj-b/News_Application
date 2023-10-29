@@ -1,17 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import "../App.css";
-// import indiaLogo from "../assets/india.svg";
-// import usLogo from "../assets/us.svg";
-// import chLogo from "../assets/china.svg";
-// import frLogo from "../assets/france.svg";
-// import dark from "../assets/dark.svg";
-// import light from "../assets/light.svg";
+import indiaLogo from "../assets/india.svg";
+import usLogo from "../assets/us.svg";
+import chLogo from "../assets/china.svg";
+import frLogo from "../assets/france.svg";
+import dark from "../assets/dark.svg";
+import light from "../assets/light.svg";
 import news from "../assets/news.png";
 import { Link } from "react-router-dom";
+import { createClient } from "@supabase/supabase-js";
+import Switcher from "./DarkModeSwitcher";
 
-export default function NavBar({ selectCountry, countryLogo, country }) {
+export default function NavBar({ countryLogo }) {
   console.log(countryLogo, "logos");
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(light);
+  const [country, setCountry] = useState("India (IN)");
+  const [defaultCountry, setDefaultCountry] = useState("/src/assets/india.svg");
+  const [selectIndia, setSelectIndia] = useState("/src/assets/india.svg");
+  const [selectUsa, setSelectUsa] = useState("/src/assets/us.svg");
+  const [selectChina, setSelectChina] = useState("/src/assets/china.svg");
+  const [selectFrance, setSelectFrance] = useState("/src/assets/france.svg");
+  const [dataNews, setDataNews] = useState([]);
+  const newsContext = createContext(dataNews);
+
+  const supabase = createClient(
+    "https://tctywptybskokqycvohr.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjdHl3cHR5YnNrb2txeWN2b2hyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTAwMTk4MjcsImV4cCI6MjAwNTU5NTgyN30.pC5bLkapBcr5vaN9QcygL0I2ptic-RxHDrLCfuSUYwg"
+  );
+  let finalArray = [];
+
   const handleDarkMode = (e) => {
     console.log(e.target, "element");
     console.log(e, "element");
@@ -22,7 +39,11 @@ export default function NavBar({ selectCountry, countryLogo, country }) {
   };
 
   const changeIcon = (e) => {
-    setDarkMode(!darkMode);
+    if (darkMode === "/src/assets/dark.svg") {
+      setDarkMode(light);
+    } else {
+      setDarkMode(dark);
+    }
   };
 
   const changeCategory = (e) => {
@@ -65,68 +86,116 @@ export default function NavBar({ selectCountry, countryLogo, country }) {
     modalEle.classList.toggle("hidden");
   };
 
+  const selectCountry = async (e) => {
+    console.log(e.target.textContent, "txt");
+    console.log(e.target.getAttribute("data-country"), "data-Evnt");
+    finalArray = [];
+    let selectedCountry;
+    if (e.target.getAttribute("data-country")) {
+      selectedCountry = e.target.getAttribute("data-country");
+    }
+    if (e.target.textContent) {
+      selectedCountry = e.target.textContent;
+    }
+    setCountry(selectedCountry);
+    if (selectedCountry.toLowerCase() === "usa") {
+      setDefaultCountry("/src/assets/us.svg");
+      const { data } = await supabase
+        .from("USA_duplicate")
+        .select("technology")
+        .not("technology", "is", null);
+
+      data.forEach((ele) => {
+        if (ele.technology) {
+          finalArray.push(ele.technology);
+        }
+      });
+      setDataNews(finalArray);
+    }
+
+    if (selectedCountry.toLowerCase() === "india") {
+      setDefaultCountry("/src/assets/india.svg");
+      const { data } = await supabase
+        .from("India_duplicate")
+        .select("business")
+        .not("business", "is", null);
+
+      data.forEach((ele) => {
+        if (ele.business) {
+          finalArray.push(ele.business);
+        }
+      });
+      setDataNews(finalArray);
+    }
+
+    if (selectedCountry.toLowerCase() === "china") {
+      setDefaultCountry("/src/assets/china.svg");
+      const { data } = await supabase
+        .from("China_duplicate")
+        .select("technology")
+        .not("technology", "is", null);
+
+      data.forEach((ele) => {
+        if (ele.technology) {
+          finalArray.push(ele.technology);
+        }
+      });
+      setDataNews(finalArray);
+    }
+
+    if (selectedCountry.toLowerCase() === "france") {
+      setDefaultCountry("/src/assets/france.svg");
+      const { data } = await supabase
+        .from("France_duplicate")
+        .select("health")
+        .not("health", "is", null);
+
+      data.forEach((ele) => {
+        if (ele.health) {
+          finalArray.push(ele.health);
+        }
+      });
+      setDataNews(finalArray);
+    }
+  };
+
   return (
     <>
-      <nav className="border-gray-200 bg-back">
+      <nav className="border-gray-200 bg-back transition duration-200 dark:bg-gray-900 fixed top-0 z-10">
         <div className="w-screen flex flex-wrap items-center justify-between p-4 mx-auto max-w-12xl px-2 sm:px-6 lg:px-8">
           <div className="flex left-0 items-center ml-0">
-            <a href="" className="flex items-center">
+            <Link className="flex items-center" to="/">
               <img src={news} className="h-8 mr-3" alt="Logo" />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900">
+              <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white">
                 News
               </span>
-            </a>
+            </Link>
+            {/* <a href="" className="flex items-center">
+              <img src={news} className="h-8 mr-3" alt="Logo" />
+              <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white">
+                News
+              </span>
+            </a> */}
           </div>
-          <div className="relative flex items-center md:order-4 nw-width">
+          <div className="relative flex items-center md:order-4 nw-width-200">
+            {/* <img
+              src={darkMode}
+              alt=""
+              className="w-5 h-5 mr-2 cursor-pointer"
+              onClick={changeIcon}
+            /> */}
+            <Switcher />
             <button
               onClick={changeCountry}
               type="button"
               data-dropdown-toggle="language-dropdown-menu"
-              className="w-max inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900  rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+              className="w-max inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900  rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
             >
               <img
                 src={countryLogo.default}
                 alt=""
                 className="w-5 h-5 mr-2 rounded-full"
               />
-              {/* <svg
-                className="w-5 h-5 mr-2 rounded-full"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                viewBox="0 0 3900 3900"
-              >
-                <path fill="#b22234" d="M0 0h7410v3900H0z" />
-                <path
-                  d="M0 450h7410m0 600H0m0 600h7410m0 600H0m0 600h7410m0 600H0"
-                  stroke="#fff"
-                  stroke-width="300"
-                />
-                <path fill="#3c3b6e" d="M0 0h2964v2100H0z" />
-                <g fill="#fff">
-                  <g id="d">
-                    <g id="c">
-                      <g id="e">
-                        <g id="b">
-                          <path
-                            id="a"
-                            d="M247 90l70.534 217.082-184.66-134.164h228.253L176.466 307.082z"
-                          />
-                          <use xlink:href="#a" y="420" />
-                          <use xlink:href="#a" y="840" />
-                          <use xlink:href="#a" y="1260" />
-                        </g>
-                        <use xlink:href="#a" y="1680" />
-                      </g>
-                      <use xlink:href="#b" x="247" y="210" />
-                    </g>
-                    <use xlink:href="#c" x="494" />
-                  </g>
-                  <use xlink:href="#d" x="988" />
-                  <use xlink:href="#c" x="1976" />
-                  <use xlink:href="#e" x="2470" />
-                </g>
-              </svg> */}
               {country} {abbreVation}
             </button>
             <div
@@ -141,41 +210,9 @@ export default function NavBar({ selectCountry, countryLogo, country }) {
                     role="menuitem"
                   >
                     <div
-                      className="inline-flex items-center gap-2"
+                      className="inline-flex items-center gap-2 dark:text-white"
                       onClick={selectCountry}
                     >
-                      {/* <svg
-                        aria-hidden="true"
-                        className="h-3.5 w-3.5 rounded-full mr-2"
-                        xmlns="http://www.w3.org/2000/svg"
-                        id="flag-icon-css-us"
-                        viewBox="0 0 512 512"
-                      >
-                        <g fill-rule="evenodd">
-                          <g stroke-width="1pt">
-                            <path
-                              fill="#bd3d44"
-                              d="M0 0h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0z"
-                              transform="scale(3.9385)"
-                            />
-                            <path
-                              fill="#fff"
-                              d="M0 10h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0z"
-                              transform="scale(3.9385)"
-                            />
-                          </g>
-                          <path
-                            fill="#192f5d"
-                            d="M0 0h98.8v70H0z"
-                            transform="scale(3.9385)"
-                          />
-                          <path
-                            fill="#fff"
-                            d="M8.2 3l1 2.8H12L9.7 7.5l.9 2.7-2.4-1.7L6 10.2l.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7L74 8.5l-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 7.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 24.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 21.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 38.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 35.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 52.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 49.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 66.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 63.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9z"
-                            transform="scale(3.9385)"
-                          />
-                        </g>
-                      </svg> */}
                       <img
                         src={countryLogo.in}
                         alt=""
@@ -351,7 +388,7 @@ export default function NavBar({ selectCountry, countryLogo, country }) {
             id="navbar-language"
           >
             <ul className="flex flex-col  font-medium items-center justify-center p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 md:mt-0 md:border-0">
-              <li>
+              <li className="block py-2 pl-3 pr-4 text-gray-900 dark:text-white">
                 {/* <a
                   href="#"
                   className="block py-2 pl-3 pr-4 text-gray-900  rounded md:bg-transparent md:text-gray-900 md:p-0 md:dark:text-gray-900"
@@ -361,23 +398,30 @@ export default function NavBar({ selectCountry, countryLogo, country }) {
                 </a> */}
                 <Link to="/">Home</Link>
               </li>
-              <li>
-                <a href="#" className="block py-2 pl-3 pr-4 text-gray-900">
-                  About
-                </a>
+              <li className="block py-2 pl-3 pr-4 text-gray-900 dark:text-white">
+                <Link to="/about">About</Link>
               </li>
-              <li>
-                <a href="#" className="block py-2 pl-3 pr-4 text-gray-900">
+              {/* <li>
+                <a
+                  href="#"
+                  className="block py-2 pl-3 pr-4 text-gray-900 dark:text-white"
+                >
                   Services
                 </a>
-              </li>
-              <li>
-                <a href="#" className="block py-2 pl-3 pr-4 text-gray-900">
+              </li> */}
+              {/* <li>
+                <a
+                  href="#"
+                  className="block py-2 pl-3 pr-4 text-gray-900 dark:text-white"
+                >
                   Pricing
                 </a>
-              </li>
+              </li> */}
               <li>
-                <a href="#" className="block py-2 pl-3 pr-4 text-gray-900">
+                <a
+                  href="#"
+                  className="block py-2 pl-3 pr-4 text-gray-900 dark:text-white"
+                >
                   Contact
                 </a>
               </li>
@@ -386,7 +430,7 @@ export default function NavBar({ selectCountry, countryLogo, country }) {
                   onClick={changeCategory}
                   id="dropdownNavbarLink"
                   data-dropdown-toggle="dropdownNavbar"
-                  className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900"
+                  className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 dark:text-white"
                 >
                   Categories
                   <svg
@@ -413,54 +457,23 @@ export default function NavBar({ selectCountry, countryLogo, country }) {
                     className="py-2 text-sm text-black dark:text-gray-400"
                     aria-labelledby="dropdownLargeButton"
                   >
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        General
-                      </a>
+                    <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <Link to="/general">General</Link>
                     </li>
-                    <li>
-                      {/* <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      > */}
-                      <Link to="/technology">Technology</Link>
-
-                      {/* </a> */}
+                    <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <Link to="/tech">Technology</Link>
                     </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Science
-                      </a>
+                    <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <Link to="/science">Science</Link>
                     </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Sports
-                      </a>
+                    <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <Link to="/sports">Sports</Link>
                     </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Business
-                      </a>
+                    <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <Link to="/business">Business</Link>
                     </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Entertainment
-                      </a>
+                    <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <Link to="/entertainment">Entertainment</Link>
                     </li>
                   </ul>
                   {/* <div className="py-1">

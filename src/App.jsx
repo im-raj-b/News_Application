@@ -12,6 +12,7 @@ import NewsCards from "./components/NewsCards";
 import news from "./assets/news.png";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./components/HomePage";
+import About from "./components/About";
 
 const supabase = createClient(
   "https://tctywptybskokqycvohr.supabase.co",
@@ -19,8 +20,8 @@ const supabase = createClient(
 );
 let finalArray = [];
 function App() {
-  const [count, setCount] = useState([]);
-  const [country, setCountry] = useState("India (IN)");
+  // const [count, setCount] = useState([]);
+  // const [country, setCountry] = useState("India (IN)");
   const [defaultCountry, setDefaultCountry] = useState("/src/assets/india.svg");
   const [selectIndia, setSelectIndia] = useState("/src/assets/india.svg");
   const [selectUsa, setSelectUsa] = useState("/src/assets/us.svg");
@@ -45,92 +46,33 @@ function App() {
   //   });
   //   setCount(finalArray);
   // }
-  const selectCountry = async (e) => {
-    console.log(e.target.textContent, "txt");
-    console.log(e.target.getAttribute("data-country"), "data-Evnt");
-    finalArray = [];
-    let selectedCountry;
-    if (e.target.getAttribute("data-country")) {
-      selectedCountry = e.target.getAttribute("data-country");
-    }
-    if (e.target.textContent) {
-      selectedCountry = e.target.textContent;
-    }
-    setCountry(selectedCountry);
-    if (selectedCountry.toLowerCase() === "usa") {
-      setDefaultCountry("/src/assets/us.svg");
-      const { data } = await supabase
-        .from("USA_duplicate")
-        .select("technology")
-        .not("technology", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.technology) {
-          finalArray.push(ele.technology);
-        }
-      });
-      setCount(finalArray);
-    }
-
-    if (selectedCountry.toLowerCase() === "india") {
-      setDefaultCountry("/src/assets/india.svg");
-      const { data } = await supabase
-        .from("India_duplicate")
-        .select("business")
-        .not("business", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.business) {
-          finalArray.push(ele.business);
-        }
-      });
-      setCount(finalArray);
-    }
-
-    if (selectedCountry.toLowerCase() === "china") {
-      setDefaultCountry("/src/assets/china.svg");
-      const { data } = await supabase
-        .from("China_duplicate")
-        .select("technology")
-        .not("technology", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.technology) {
-          finalArray.push(ele.technology);
-        }
-      });
-      setCount(finalArray);
-    }
-
-    if (selectedCountry.toLowerCase() === "france") {
-      setDefaultCountry("/src/assets/france.svg");
-      const { data } = await supabase
-        .from("France_duplicate")
-        .select("health")
-        .not("health", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.health) {
-          finalArray.push(ele.health);
-        }
-      });
-      setCount(finalArray);
-    }
-  };
 
   const handleClick = () => {
     setShowContent(true);
   };
   return (
     <>
+      <NavBar
+        // selectCountry={selectCountry}
+        countryLogo={{
+          in: selectIndia,
+          us: selectUsa,
+          ch: selectChina,
+          fr: selectFrance,
+          default: defaultCountry,
+        }}
+        // country={country}
+      />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<About />} />
+
         <Route
           path="/main"
           element={
-            <div className="main">
-              <NavBar
-                selectCountry={selectCountry}
+            <div className="main transition duration-200 dark:bg-gray-900">
+              {/* <NavBar
+                // selectCountry={selectCountry}
                 countryLogo={{
                   in: selectIndia,
                   us: selectUsa,
@@ -138,18 +80,19 @@ function App() {
                   fr: selectFrance,
                   default: defaultCountry,
                 }}
-                country={country}
-              />
-              <NewsCards newsData={"hi"} />
+                // country={country}
+              /> */}
+              <NewsCards category="general" />
             </div>
           }
         />
         <Route
-          path="/technology"
+          exact
+          path="/tech"
           element={
             <div className="main">
               {/* <NavBar
-                selectCountry={selectCountry}
+                // selectCountry={selectCountry}
                 countryLogo={{
                   in: selectIndia,
                   us: selectUsa,
@@ -157,9 +100,115 @@ function App() {
                   fr: selectFrance,
                   default: defaultCountry,
                 }}
-                country={country}
+                // country={country}
+                key={"technology"}
               /> */}
-              <NewsCards newsData={count} />
+              <NewsCards category="technology" key={"technology"} />
+            </div>
+          }
+        />
+        <Route
+          exact
+          path="/general"
+          element={
+            <div className="main">
+              {/* <NavBar
+                // selectCountry={selectCountry}
+                countryLogo={{
+                  in: selectIndia,
+                  us: selectUsa,
+                  ch: selectChina,
+                  fr: selectFrance,
+                  default: defaultCountry,
+                }}
+                // country={country}
+                key={"general"}
+              /> */}
+              <NewsCards category="general" key={"general"} />
+            </div>
+          }
+        />
+        <Route
+          exact
+          path="/science"
+          element={
+            <div className="main">
+              {/* <NavBar
+                // selectCountry={selectCountry}
+                countryLogo={{
+                  in: selectIndia,
+                  us: selectUsa,
+                  ch: selectChina,
+                  fr: selectFrance,
+                  default: defaultCountry,
+                }}
+                // country={country}
+                key={"science"}
+              /> */}
+              <NewsCards category="science" key={"science"} />
+            </div>
+          }
+        />
+        <Route
+          exact
+          path="/sports"
+          element={
+            <div className="main">
+              {/* <NavBar
+                // selectCountry={selectCountry}
+                countryLogo={{
+                  in: selectIndia,
+                  us: selectUsa,
+                  ch: selectChina,
+                  fr: selectFrance,
+                  default: defaultCountry,
+                }}
+                // country={country}
+                key={"sports"}
+              /> */}
+              <NewsCards category="sports" key={"sports"} />
+            </div>
+          }
+        />
+        <Route
+          exact
+          path="/business"
+          element={
+            <div className="main">
+              {/* <NavBar
+                // selectCountry={selectCountry}
+                countryLogo={{
+                  in: selectIndia,
+                  us: selectUsa,
+                  ch: selectChina,
+                  fr: selectFrance,
+                  default: defaultCountry,
+                }}
+                // country={country}
+                key={"sports"}
+              /> */}
+              <NewsCards category="business" key={"business"} />
+            </div>
+          }
+        />
+        <Route
+          exact
+          path="/entertainment"
+          element={
+            <div className="main">
+              {/* <NavBar
+                // selectCountry={selectCountry}
+                countryLogo={{
+                  in: selectIndia,
+                  us: selectUsa,
+                  ch: selectChina,
+                  fr: selectFrance,
+                  default: defaultCountry,
+                }}
+                // country={country}
+                key={"sports"}
+              /> */}
+              <NewsCards category="entertainment" key={"entertainment"} />
             </div>
           }
         />

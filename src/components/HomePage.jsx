@@ -12,7 +12,7 @@ export default function HomePage({ show }) {
           Fetch some news
         </button>
       </div> */}
-      <header class="bg-blue-500 text-white py-4">
+      {/* <header class="bg-blue-500 text-white py-4">
         <div class="container mx-auto">
           <nav class="flex justify-between items-center">
             <div class="logo text-2xl font-bold">News</div>
@@ -29,7 +29,7 @@ export default function HomePage({ show }) {
             </ul>
           </nav>
         </div>
-      </header>
+      </header> */}
 
       <section class="bg-blue-900 text-white py-16">
         <div class="container mx-auto text-center">
