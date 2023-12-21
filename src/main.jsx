@@ -4,6 +4,7 @@ import App from "./App";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import NewsCards from "./components/NewsCards";
+import ActiveRouteState from "./context/states/ActiveRoute";
 
 // const router = createBrowserRouter([
 //   {
@@ -19,6 +20,8 @@ import NewsCards from "./components/NewsCards";
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <RouterProvider router={router} />
   <BrowserRouter>
-    <App />
+    <ActiveRouteState>
+      <App />
+    </ActiveRouteState>
   </BrowserRouter>
 );
