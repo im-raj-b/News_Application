@@ -49,13 +49,13 @@ const NewsCards = function ({ category, scrollPosition }) {
     topLoadBar.update(60);
     let tableName;
 
-    if (countryData.state.toLowerCase() === "india") {
+    if (countryData.state.toLowerCase() === "in") {
       tableName = "India_duplicate";
-    } else if (countryData.state.toLowerCase() === "usa") {
+    } else if (countryData.state.toLowerCase() === "us") {
       tableName = "USA_duplicate";
-    } else if (countryData.state.toLowerCase() === "france") {
+    } else if (countryData.state.toLowerCase() === "fr") {
       tableName = "France_duplicate";
-    } else if (countryData.state.toLowerCase() === "china") {
+    } else if (countryData.state.toLowerCase() === "ch") {
       tableName = "China_duplicate";
     }
     if (category.toLowerCase() === "general") {

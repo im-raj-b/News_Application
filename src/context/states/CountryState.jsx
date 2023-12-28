@@ -3,7 +3,7 @@ import CountryContext from "../CountryContext";
 import { useState } from "react";
 
 const CountryState = (props) => {
-  const [countryState, setCountryState] = useState("India");
+  const [countryState, setCountryState] = useState("IN");
   const [newsData, setNewsData] = useState([]);
   const [logo, setLogo] = useState("/src/assets/india.svg");
   const updateCountryState = (params) => {

@@ -116,7 +116,16 @@ function App() {
       <TopLoadingBar>
         <CountryState>
           <NavBarState>
-            <NavBar
+            {/* <NavBar
+              countryLogo={{
+                in: selectIndia,
+                us: selectUsa,
+                ch: selectChina,
+                fr: selectFrance,
+                default: defaultCountry,
+              }}
+            /> */}
+            <NavigationBar
               countryLogo={{
                 in: selectIndia,
                 us: selectUsa,
@@ -125,7 +134,6 @@ function App() {
                 default: defaultCountry,
               }}
             />
-            {/* <NavigationBar />? */}
             {/* <LoadingBar
               color="#f11946"
               progress={50}
@@ -142,9 +150,6 @@ function App() {
                   <div
                     className="main transition duration-200 dark:bg-gray-900"
                     id="swipeElement"
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
                   >
                     <NewsCards category="general" />
                   </div>
@@ -154,12 +159,7 @@ function App() {
                 exact
                 path="/tech"
                 element={
-                  <div
-                    className="main"
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
-                  >
+                  <div className="main">
                     <NewsCards category="technology" key={"technology"} />
                   </div>
                 }
@@ -168,12 +168,7 @@ function App() {
                 exact
                 path="/general"
                 element={
-                  <div
-                    className="main"
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
-                  >
+                  <div className="main">
                     <NewsCards category="general" key={"general"} />
                   </div>
                 }
@@ -182,12 +177,7 @@ function App() {
                 exact
                 path="/science"
                 element={
-                  <div
-                    className="main"
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
-                  >
+                  <div className="main">
                     <NewsCards category="science" key={"science"} />
                   </div>
                 }
@@ -196,12 +186,7 @@ function App() {
                 exact
                 path="/sports"
                 element={
-                  <div
-                    className="main"
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
-                  >
+                  <div className="main">
                     <NewsCards category="sports" key={"sports"} />
                   </div>
                 }
@@ -210,12 +195,7 @@ function App() {
                 exact
                 path="/business"
                 element={
-                  <div
-                    className="main"
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
-                  >
+                  <div className="main">
                     <NewsCards category="business" key={"business"} />
                   </div>
                 }
@@ -224,12 +204,7 @@ function App() {
                 exact
                 path="/entertainment"
                 element={
-                  <div
-                    className="main"
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
-                  >
+                  <div className="main">
                     <NewsCards category="entertainment" key={"entertainment"} />
                   </div>
                 }
@@ -238,12 +213,7 @@ function App() {
                 exact
                 path="/health"
                 element={
-                  <div
-                    className="main"
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
-                  >
+                  <div className="main">
                     <NewsCards category="health" key={"health"} />
                   </div>
                 }
@@ -253,39 +223,6 @@ function App() {
         </CountryState>
       </TopLoadingBar>
 
-      {/* {showContent ? (
-          <div className="main">
-            <NavBar
-              selectCountry={selectCountry}
-              countryLogo={{
-                in: selectIndia,
-                us: selectUsa,
-                ch: selectChina,
-                fr: selectFrance,
-                default: defaultCountry,
-              }}
-              country={country}
-            />
-            <NewsCards newsData={count} />
-          </div>
-        ) : (
-          <HomePage show={handleClick} />
-        )} */}
-      {/* <HomePage show={handleClick} /> */}
-      {/* {showContent && (
-        <div className="main">
-          <NavBar
-            selectCountry={selectCountry}
-            countryLogo={{
-              in: selectIndia,
-              us: selectUsa,
-              ch: selectChina,
-              fr: selectFrance,
-              default: defaultCountry,
-            }}
-            country={country}
-          />
-          <NewsCards newsData={count} /> */}
       {/* <img
           src="https://www.gstatic.com/youtube/img/promos/growth/ddf13c1c1c7a76c5e367063489ca4a6ace2fef8adc8597726b4ec2e46e34151f_129x56.webp"
           alt=""

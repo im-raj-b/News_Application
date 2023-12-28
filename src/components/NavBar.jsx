@@ -76,16 +76,16 @@ export default function NavBar({ countryLogo }) {
   //   // setCountry(e.target.textContent);
   // };
   let abbreVation;
-  if (countryCon.state === "India") {
+  if (countryCon.state === "IN") {
     abbreVation = "(IN)";
   }
-  if (countryCon.state === "China") {
+  if (countryCon.state === "CH") {
     abbreVation = "(CH)";
   }
-  if (countryCon.state === "USA") {
+  if (countryCon.state === "US") {
     abbreVation = "(US)";
   }
-  if (countryCon.state === "France") {
+  if (countryCon.state === "FR") {
     abbreVation = "(FR)";
   }
 
@@ -108,7 +108,7 @@ export default function NavBar({ countryLogo }) {
     // setCountry(selectedCountry);
 
     countryCon.update(selectedCountry);
-    if (selectedCountry.toLowerCase() === "usa") {
+    if (selectedCountry.toLowerCase() === "us") {
       countryCon.updateLogo("/src/assets/us.svg");
       const { data } = await supabase
         .from("USA_duplicate")
@@ -123,7 +123,7 @@ export default function NavBar({ countryLogo }) {
       countryCon.setData(finalArray);
     }
 
-    if (selectedCountry.toLowerCase() === "india") {
+    if (selectedCountry.toLowerCase() === "in") {
       countryCon.updateLogo("/src/assets/india.svg");
       const { data } = await supabase
         .from("India_duplicate")
@@ -138,7 +138,7 @@ export default function NavBar({ countryLogo }) {
       countryCon.setData(finalArray);
     }
 
-    if (selectedCountry.toLowerCase() === "china") {
+    if (selectedCountry.toLowerCase() === "ch") {
       countryCon.updateLogo("/src/assets/china.svg");
       const { data } = await supabase
         .from("China_duplicate")
@@ -153,7 +153,7 @@ export default function NavBar({ countryLogo }) {
       countryCon.setData(finalArray);
     }
 
-    if (selectedCountry.toLowerCase() === "france") {
+    if (selectedCountry.toLowerCase() === "fr") {
       countryCon.updateLogo("/src/assets/france.svg");
       const { data } = await supabase
         .from("France_duplicate")
@@ -218,7 +218,7 @@ export default function NavBar({ countryLogo }) {
                           className="h-7 w-7"
                           data-country="India"
                         />
-                        India
+                        IN
                       </div>
                     </a>
                   </li>
@@ -238,7 +238,7 @@ export default function NavBar({ countryLogo }) {
                           className="h-7 w-7"
                           data-country="USA"
                         />
-                        USA
+                        US
                       </div>
                     </a>
                   </li>
@@ -258,7 +258,7 @@ export default function NavBar({ countryLogo }) {
                           className="h-7 w-7"
                           data-country="China"
                         />
-                        China
+                        CH
                       </div>
                     </a>
                   </li>
@@ -279,13 +279,13 @@ export default function NavBar({ countryLogo }) {
                           className="h-7 w-7"
                           data-country="France"
                         />
-                        France
+                        FR
                       </div>
                     </a>
                   </li>
                 </ul>
               </div>
-              <div className="flex justify-center items-center md:hidden">
+              {/* <div className="flex justify-center items-center md:hidden">
                 <button
                   onClick={showMenuModal}
                   data-collapse-toggle="navbar-language"
@@ -311,137 +311,116 @@ export default function NavBar({ countryLogo }) {
                     />
                   </svg>
                 </button>
-              </div>
+              </div> */}
             </div>
-            <div
-              className="news-modal news-sm-modal relative items-center justify-between hidden w-450 md:flex md:w-auto md:order-1"
-              id="navbar-language"
-            >
-              <ul className="flex flex-col  font-medium items-center justify-center p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 md:mt-0 md:border-0">
-                <li className="block py-2 pl-3 pr-4 text-gray-900 dark:text-white">
-                  <Link to="/">Home</Link>
-                </li>
-                <li className="block py-2 pl-3 pr-4 text-gray-900 dark:text-white">
-                  <Link to="/about">About</Link>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="block py-2 pl-3 pr-4 text-gray-900 dark:text-white"
-                  >
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-            {toggleNavBar.state && (
-              //px-18 py-10
-              <div className="news-navbar-sec mb-0 md:px-10 text-white flex flex-nowrap gap-8 fixed justify-center z-10 sm:top-30  md:w-full sm:news-navbar-width overflow-x-scroll sm:overflow-x-auto top-10 ml-30 md:ml-0">
-                <nav className="flex md:flex-wrap sm:flex-none sm:justify-between">
-                  <Link
-                    className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                    to="/"
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                    to="/tech"
-                  >
-                    Technology
-                  </Link>
-                  <Link
-                    className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                    to="/science"
-                  >
-                    Science
-                  </Link>
-
-                  <Link
-                    className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                    to="/sports"
-                  >
-                    Sports
-                  </Link>
-
-                  <Link
-                    className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                    to="/business"
-                  >
-                    Business
-                  </Link>
-
-                  <Link
-                    className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                    to="/entertainment"
-                  >
-                    Entertainment
-                  </Link>
-
-                  <Link
-                    className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                    to="/health"
-                  >
-                    Health
-                  </Link>
-                </nav>
-              </div>
-              // <div className="news-navbar-sec mb-0 md:px-10 text-white flex flex-wrap md:flex-nowrap gap-8 fixed justify-center z-10 sm:top-30 md:w-full overflow-x-scroll sm:overflow-x-auto top-10 ml-30 md:ml-0">
-              //   <nav className="flex md:flex-wrap sm:flex-none sm:justify-between">
-              //     <Link
-              //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              //       to="/"
-              //     >
-              //       Home
-              //     </Link>
-              //     <Link
-              //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              //       to="/tech"
-              //     >
-              //       Technology
-              //     </Link>
-              //     <Link
-              //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              //       to="/science"
-              //     >
-              //       Science
-              //     </Link>
-              //     <Link
-              //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              //       to="/sports"
-              //     >
-              //       Sports
-              //     </Link>
-              //     <Link
-              //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              //       to="/business"
-              //     >
-              //       Business
-              //     </Link>
-              //     <Link
-              //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              //       to="/entertainment"
-              //     >
-              //       Entertainment
-              //     </Link>
-              //     <Link
-              //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              //       to="/health"
-              //     >
-              //       Health
-              //     </Link>
-              //   </nav>
-              // </div>
-              // <NavbarSwipe />
-            )}
-            <LoadingBar
-              color="#f11946"
-              progress={topLoader.state}
-              height={2}
-              // onLoaderFinished={1}
-            />
           </div>
         </nav>
+        {toggleNavBar.state && (
+          //px-18 py-10
+          <div className="news-navbar-sec mb-0 md:px-10 text-white flex flex-nowrap gap-8 fixed justify-center z-10 sm:top-30  md:w-full sm:news-navbar-width overflow-x-scroll sm:overflow-x-auto top-10 ml-30 md:ml-0">
+            <nav className="flex md:flex-wrap sm:flex-none sm:justify-between">
+              <Link
+                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                to="/"
+              >
+                Home
+              </Link>
+              <Link
+                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                to="/tech"
+              >
+                Technology
+              </Link>
+              <Link
+                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                to="/science"
+              >
+                Science
+              </Link>
+
+              <Link
+                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                to="/sports"
+              >
+                Sports
+              </Link>
+
+              <Link
+                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                to="/business"
+              >
+                Business
+              </Link>
+
+              <Link
+                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                to="/entertainment"
+              >
+                Entertainment
+              </Link>
+
+              <Link
+                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                to="/health"
+              >
+                Health
+              </Link>
+            </nav>
+          </div>
+          // <div className="news-navbar-sec mb-0 md:px-10 text-white flex flex-wrap md:flex-nowrap gap-8 fixed justify-center z-10 sm:top-30 md:w-full overflow-x-scroll sm:overflow-x-auto top-10 ml-30 md:ml-0">
+          //   <nav className="flex md:flex-wrap sm:flex-none sm:justify-between">
+          //     <Link
+          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+          //       to="/"
+          //     >
+          //       Home
+          //     </Link>
+          //     <Link
+          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+          //       to="/tech"
+          //     >
+          //       Technology
+          //     </Link>
+          //     <Link
+          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+          //       to="/science"
+          //     >
+          //       Science
+          //     </Link>
+          //     <Link
+          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+          //       to="/sports"
+          //     >
+          //       Sports
+          //     </Link>
+          //     <Link
+          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+          //       to="/business"
+          //     >
+          //       Business
+          //     </Link>
+          //     <Link
+          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+          //       to="/entertainment"
+          //     >
+          //       Entertainment
+          //     </Link>
+          //     <Link
+          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+          //       to="/health"
+          //     >
+          //       Health
+          //     </Link>
+          //   </nav>
+          // </div>
+          // <NavbarSwipe />
+        )}
+        <LoadingBar
+          color="#f11946"
+          progress={topLoader.state}
+          height={2}
+          // onLoaderFinished={1}
+        />
       </div>
     </>
   );
