@@ -209,7 +209,7 @@ export default function NavBar({ countryLogo }) {
                       role="menuitem"
                     >
                       <div
-                        className="inline-flex items-center gap-2 dark:text-white"
+                        className="inline-flex items-center gap-2"
                         onClick={selectCountry}
                       >
                         <img

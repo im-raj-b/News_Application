@@ -33,6 +33,26 @@ const NewsCards = function ({ category, scrollPosition }) {
     function () {
       console.log("useEffect");
       console.log(callForData, "funnnnnn");
+      const ele = document.querySelectorAll(".news-list li").forEach((ele) => {
+        console.log(ele, "elements");
+
+        ele.addEventListener("click", (e) => {
+          console.log(e);
+          // if (e.target.parentElement.classList.contains("bg-teal-300")) {
+          //   e.target.parentElement.classList.remove("bg-teal-300");
+          //   e.target.parentElement.classList.remove("rounded");
+          //   e.target.parentElement.classList.remove("h-6");
+          // } else {
+          e.target.parentElement.classList.add("bg-teal-300");
+          e.target.parentElement.classList.add("rounded");
+          e.target.parentElement.classList.add("h-6");
+          // }
+        });
+        ele.classList.remove("bg-teal-300");
+        ele.classList.remove("rounded");
+        ele.classList.remove("h-6");
+      });
+      console.log(ele, "Lists");
       const fetchData = async () => {
         await getCountries();
         // await getTech();
@@ -257,8 +277,26 @@ const NewsCards = function ({ category, scrollPosition }) {
                     <>
                       {ele
                         ? ele.map((eachEle, index) => {
+                            let filteredData = {};
+
+                            if (
+                              eachEle.title &&
+                              eachEle.author &&
+                              eachEle.urlToImage &&
+                              eachEle.source.name &&
+                              eachEle.url
+                            ) {
+                              filteredData = {
+                                title: eachEle.title,
+                                author: eachEle.author,
+                                content: eachEle.content,
+                                urlToImage: eachEle.urlToImage,
+                                source: eachEle.source.name,
+                                url: eachEle.url,
+                              };
+                            }
                             return (
-                              <div>
+                              <div className="">
                                 <NewsCard data={eachEle} key={index} />
                               </div>
                             );

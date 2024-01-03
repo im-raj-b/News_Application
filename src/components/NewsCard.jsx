@@ -3,6 +3,7 @@ import {
   trackWindowScroll,
 } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import noImage from "../assets/no-image.png";
 
 const NewsCard = function ({ data, scrollPosition }) {
   return (
@@ -53,11 +54,11 @@ const NewsCard = function ({ data, scrollPosition }) {
     //     </a>
     //   </div>
     // </div>
-    <div className="grid grid-cols-1 items-center justify-around gap-6 rounded-xl bg-white dark:bg-zinc-800 py-8 px-8 md:grid-cols-2 md:gap-2 shadow-[5px_5px_0px_0px_rgba(45,212,191)]">
+    <div className="grid grid-cols-1 items-center justify-around gap-6 rounded-xl border-black dark:bg-zinc-800 py-8 px-8 md:grid-cols-2 md:gap-2 shadow-[5px_5px_0px_0px_rgba(45,212,191)]">
       <span className="nw-image">
         <LazyLoadImage
           className="rounded-t-lg"
-          src={data.urlToImage}
+          src={data.urlToImage ? data.urlToImage : noImage}
           effect="blur"
           delayTime={5000}
           scrollPosition={scrollPosition}

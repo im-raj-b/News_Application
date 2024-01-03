@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import news from "../assets/news_new.png";
 import dark from "../assets/dark.svg";
@@ -12,7 +12,7 @@ import LoadingBar from "react-top-loading-bar";
 import TopLoadingContext from "../context/TopLoadContext";
 import NavBar from "./NavBar";
 
-export default function NavigationBar(countryLogo) {
+export default function NavigationBar({ countryLogo }) {
   const [darkMode, setDarkMode] = useState(light);
   const countryCon = useContext(CountryContext);
   const [defaultCountry, setDefaultCountry] = useState("/src/assets/india.svg");
@@ -32,6 +32,26 @@ export default function NavigationBar(countryLogo) {
   let finalArray = [];
 
   console.log(countryCon, "countryCon");
+  useEffect(() => {
+    document.addEventListener("scroll", (e) => {
+      console.log("Scrolling.......");
+
+      const dropDownEle = document.querySelector(".news-country-drop");
+      const navbarEle = document.querySelector(".nw-bar");
+
+      if (!dropDownEle.classList.contains("hidden")) {
+        dropDownEle.classList.toggle("hidden");
+        navbarEle.classList.toggle("z-30");
+
+        // dropDownEle.classList.toggle("z-30");
+      }
+    });
+    // document.addEventListener("scrollend", () => {
+    //   console.log("Scrolling.......");
+    //   const dropDownEle = document.querySelector(".news-country-drop");
+    //   dropDownEle.classList.toggle("hidden");
+    // });
+  }, []);
   const handleDarkMode = (e) => {
     console.log(e.target, "element");
     console.log(e, "element");
@@ -52,12 +72,24 @@ export default function NavigationBar(countryLogo) {
   const changeCategory = (e) => {
     const dropDownEle = document.querySelector(".category-drop");
     dropDownEle.classList.toggle("hidden");
+
     // console.log(e);
   };
 
   const changeCountry = (e) => {
     const dropDownEle = document.querySelector(".news-country-drop");
+    const navbarEle = document.querySelector(".nw-bar");
     dropDownEle.classList.toggle("hidden");
+    dropDownEle.classList.toggle("z-30");
+    navbarEle.classList.toggle("z-30");
+    // if (!dropDownEle.classList.contains("z-30")) {
+    //   dropDownEle.classList.toggle("z-30");
+    // }
+    // // dropDownEle.classList.toggle("z-30");
+    // if (!navbarEle.classList.contains("z-30")) {
+    //   navbarEle.classList.toggle("z-30");
+    // }
+
     // console.log(e);
   };
 
@@ -182,11 +214,11 @@ export default function NavigationBar(countryLogo) {
   return !bool ? (
     <NavBar
       countryLogo={{
-        in: "",
-        us: "",
-        ch: "",
-        fr: "",
-        default: "",
+        in: selectIndia,
+        us: selectUsa,
+        ch: selectChina,
+        fr: selectFrance,
+        default: defaultCountry,
       }}
     />
   ) : (
@@ -287,6 +319,7 @@ export default function NavigationBar(countryLogo) {
           </div>
           <div className="relative flex items-center md:order-4 w-200 px-8">
             <Switcher />
+
             <button
               onClick={changeCountry}
               type="button"
@@ -300,8 +333,9 @@ export default function NavigationBar(countryLogo) {
               />
               {countryCon.state}
             </button>
+
             <div
-              className="news-country-drop absolute z-50 top-[15px] hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-full"
+              className="news-country-drop absolute top-[15px] hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-full"
               id="language-dropdown-menu"
             >
               <ul className="py-2 font-medium" role="none">
@@ -312,7 +346,7 @@ export default function NavigationBar(countryLogo) {
                     role="menuitem"
                   >
                     <div
-                      className="inline-flex items-center gap-2 dark:text-white"
+                      className="inline-flex items-center gap-2"
                       onClick={selectCountry}
                     >
                       <img
@@ -413,16 +447,16 @@ export default function NavigationBar(countryLogo) {
         </div>
       </nav>
       {toggleNavBar.state && (
-        <div class="fixed top-20 z-30 left-1/2 transform -translate-x-1/2 inline-flex mx-auto justify-between bg-blue-600 w-11/12 rounded-3xl ">
-          <div class="w-full relative right-0">
+        <div class="fixed nw-bar top-20 z-30 nw-margin left-1/2 transform -translate-x-1/2 inline-flex mx-auto justify-between bg-blue-600 w-11/12 rounded-3xl h-50">
+          <div class="news-list overflow-x-scroll overflow-y-hidden scroll-smooth">
             <ul
-              class="relative flex flex-wrap p-1 list-none rounded-lg bg-blue-gray-50/60"
+              class="relative flex justify-normal p-1 list-none rounded-lg bg-blue-gray-50/60"
               data-tabs="tabs"
               role="list"
             >
               <li class="flex-auto text-center">
                 <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
+                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500 rounded-sm"
                   to="/"
                 >
                   Home
@@ -430,7 +464,7 @@ export default function NavigationBar(countryLogo) {
               </li>
               <li class="flex-auto text-center">
                 <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
+                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500 "
                   to="/tech"
                 >
                   Technology
