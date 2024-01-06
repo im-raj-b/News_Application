@@ -232,12 +232,7 @@ export default function NavBar({ countryLogo }) {
                         className="inline-flex items-center gap-2"
                         onClick={selectCountry}
                       >
-                        <img
-                          src={countryLogo.in}
-                          alt=""
-                          className="nw-img cursor-default"
-                          data-country="India"
-                        />
+                        <India />
                         IN
                       </div>
                     </a>
@@ -252,12 +247,7 @@ export default function NavBar({ countryLogo }) {
                         className="inline-flex items-center gap-2"
                         onClick={selectCountry}
                       >
-                        <img
-                          src={countryLogo.us}
-                          alt=""
-                          className="nw-img cursor-default"
-                          data-country="USA"
-                        />
+                        <Usa />
                         US
                       </div>
                     </a>
@@ -272,12 +262,7 @@ export default function NavBar({ countryLogo }) {
                         className="inline-flex items-center gap-2"
                         onClick={selectCountry}
                       >
-                        <img
-                          src={countryLogo.ch}
-                          alt=""
-                          className="nw-img cursor-default"
-                          data-country="China"
-                        />
+                        <China />
                         CH
                       </div>
                     </a>
@@ -292,13 +277,7 @@ export default function NavBar({ countryLogo }) {
                         className="inline-flex items-center gap-2"
                         onClick={selectCountry}
                       >
-                        <img
-                          src={countryLogo.fr}
-                          alt=""
-                          srcset=""
-                          className="nw-img cursor-default"
-                          data-country="France"
-                        />
+                        <France />
                         FR
                       </div>
                     </a>
