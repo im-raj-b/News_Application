@@ -217,7 +217,7 @@ export default function NavBar({ countryLogo }) {
                         <img
                           src={countryLogo.in}
                           alt=""
-                          className="h-7 w-7"
+                          className="nw-img cursor-default"
                           data-country="India"
                         />
                         IN
@@ -237,7 +237,7 @@ export default function NavBar({ countryLogo }) {
                         <img
                           src={countryLogo.us}
                           alt=""
-                          className="h-7 w-7"
+                          className="nw-img cursor-default"
                           data-country="USA"
                         />
                         US
@@ -257,7 +257,7 @@ export default function NavBar({ countryLogo }) {
                         <img
                           src={countryLogo.ch}
                           alt=""
-                          className="h-7 w-7"
+                          className="nw-img cursor-default"
                           data-country="China"
                         />
                         CH
@@ -278,7 +278,7 @@ export default function NavBar({ countryLogo }) {
                           src={countryLogo.fr}
                           alt=""
                           srcset=""
-                          className="h-7 w-7"
+                          className="nw-img cursor-default"
                           data-country="France"
                         />
                         FR

@@ -31,11 +31,11 @@ const supabase = createClient(
 let finalArray = [];
 function App() {
   // const [count, setCount] = useState([]);
-  const [defaultCountry, setDefaultCountry] = useState("/src/assets/india.svg");
-  const [selectIndia, setSelectIndia] = useState("/src/assets/india.svg");
-  const [selectUsa, setSelectUsa] = useState("/src/assets/us.svg");
-  const [selectChina, setSelectChina] = useState("/src/assets/china.svg");
-  const [selectFrance, setSelectFrance] = useState("/src/assets/france.svg");
+  const [defaultCountry, setDefaultCountry] = useState("/src/assets/in.png");
+  const [selectIndia, setSelectIndia] = useState("/src/assets/in.png");
+  const [selectUsa, setSelectUsa] = useState("/src/assets/us.png");
+  const [selectChina, setSelectChina] = useState("/src/assets/ch.png");
+  const [selectFrance, setSelectFrance] = useState("/src/assets/fr.png");
   const currentRoute = useContext(NavBarContext);
 
   const activeRoute = useContext(RouteContext);

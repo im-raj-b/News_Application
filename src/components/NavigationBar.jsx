@@ -15,11 +15,11 @@ import NavBar from "./NavBar";
 export default function NavigationBar({ countryLogo }) {
   const [darkMode, setDarkMode] = useState(light);
   const countryCon = useContext(CountryContext);
-  const [defaultCountry, setDefaultCountry] = useState("/src/assets/india.svg");
-  const [selectIndia, setSelectIndia] = useState("/src/assets/india.svg");
-  const [selectUsa, setSelectUsa] = useState("/src/assets/us.svg");
-  const [selectChina, setSelectChina] = useState("/src/assets/china.svg");
-  const [selectFrance, setSelectFrance] = useState("/src/assets/france.svg");
+  const [defaultCountry, setDefaultCountry] = useState("/src/assets/in.png");
+  const [selectIndia, setSelectIndia] = useState("/src/assets/in.png");
+  const [selectUsa, setSelectUsa] = useState("/src/assets/us.png");
+  const [selectChina, setSelectChina] = useState("/src/assets/ch.png");
+  const [selectFrance, setSelectFrance] = useState("/src/assets/fr.png");
   const [dataNews, setDataNews] = useState([]);
   const newsContext = createContext(dataNews);
   const toggleNavBar = useContext(NavBarContext);
