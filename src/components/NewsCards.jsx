@@ -14,6 +14,8 @@ import TopLoadingContext from "../context/TopLoadContext";
 import CountryContext from "../context/CountryContext";
 import callForData from "../api/SupaBase";
 // import NavBarContext from "../context/ShowNavBarContext";
+import filterData from "./utility";
+import ScrolltoTop from "./ScrolltoTop";
 
 const NewsCards = function ({ category, scrollPosition }) {
   const [dataNews, setDataNews] = useState([]);
@@ -32,30 +34,8 @@ const NewsCards = function ({ category, scrollPosition }) {
   topLoadBar.update(0);
   console.log(toggleNavBar, "toggleNavBar-------");
 
-  const [isVisible, setIsVisible] = useState(false);
-
-  // Show the button when the user scrolls down
-  const handleScroll = () => {
-    if (window.pageYOffset > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
-
-  // Scroll to top when the button is clicked
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth", // Optional: add smooth scrolling behavior
-    });
-  };
-
   useEffect(
     function () {
-      console.log("useEffect");
-      console.log(callForData, "funnnnnn");
-      window.addEventListener("scroll", handleScroll);
       const ele = document.querySelectorAll(".news-list li").forEach((ele) => {
         console.log(ele, "elements");
 
@@ -81,15 +61,10 @@ const NewsCards = function ({ category, scrollPosition }) {
       console.log(ele, "Lists");
       const fetchData = async () => {
         await getCountries();
-        // await getTech();
       };
       toggleNavBar.update(true);
       fetchData();
       topLoadBar.update(80);
-
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
     },
     [value]
   );
@@ -119,7 +94,8 @@ const NewsCards = function ({ category, scrollPosition }) {
           finalArray.push(ele.general);
         }
       });
-      countryData.setData(finalArray);
+      const filteredData = filterData(finalArray);
+      countryData.setData(filteredData);
       return;
     }
     if (category.toLowerCase() === "science") {
@@ -133,7 +109,8 @@ const NewsCards = function ({ category, scrollPosition }) {
           finalArray.push(ele.science);
         }
       });
-      countryData.setData(finalArray);
+      const filteredData = filterData(finalArray);
+      countryData.setData(filteredData);
 
       return;
     }
@@ -148,7 +125,8 @@ const NewsCards = function ({ category, scrollPosition }) {
           finalArray.push(ele.sports);
         }
       });
-      countryData.setData(finalArray);
+      const filteredData = filterData(finalArray);
+      countryData.setData(filteredData);
 
       return;
     }
@@ -163,7 +141,8 @@ const NewsCards = function ({ category, scrollPosition }) {
           finalArray.push(ele.entertainment);
         }
       });
-      countryData.setData(finalArray);
+      const filteredData = filterData(finalArray);
+      countryData.setData(filteredData);
 
       return;
     }
@@ -178,7 +157,8 @@ const NewsCards = function ({ category, scrollPosition }) {
           finalArray.push(ele.business);
         }
       });
-      countryData.setData(finalArray);
+      const filteredData = filterData(finalArray);
+      countryData.setData(filteredData);
 
       return;
     }
@@ -193,7 +173,8 @@ const NewsCards = function ({ category, scrollPosition }) {
           finalArray.push(ele.health);
         }
       });
-      countryData.setData(finalArray);
+      const filteredData = filterData(finalArray);
+      countryData.setData(filteredData);
 
       return;
     }
@@ -208,7 +189,8 @@ const NewsCards = function ({ category, scrollPosition }) {
           finalArray.push(ele.technology);
         }
       });
-      countryData.setData(finalArray);
+      const filteredData = filterData(finalArray);
+      countryData.setData(filteredData);
 
       return;
     } else {
@@ -222,7 +204,8 @@ const NewsCards = function ({ category, scrollPosition }) {
           finalArray.push(ele.dataUS);
         }
       });
-      countryData.setData(finalArray);
+      const filteredData = filterData(finalArray);
+      countryData.setData(filteredData);
 
       return;
     }
@@ -300,7 +283,7 @@ const NewsCards = function ({ category, scrollPosition }) {
         <div className="mb-auto px-5 py-10 md:py-20 md:px-10 mt-10">
           <div className="mb-20 flex flex-col gap-10">
             <div className="flex flex-col gap-3">
-              <div
+              {/* <div
                 className={`scroll-to-top ${
                   isVisible
                     ? "visible dark:text-white text-yellow-500 z-30"
@@ -330,7 +313,8 @@ const NewsCards = function ({ category, scrollPosition }) {
                     </svg>
                   </button>
                 )}
-              </div>
+              </div> */}
+              <ScrolltoTop />
               <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
                 {countryData.allNewsData.map((ele) => {
                   // console.log(ele, "got it");

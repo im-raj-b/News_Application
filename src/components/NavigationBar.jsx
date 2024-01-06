@@ -328,7 +328,7 @@ export default function NavigationBar({ countryLogo }) {
             </button>
 
             <div
-              className="news-country-drop absolute top-[15px] hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-full"
+              className="news-country-drop absolute top-[15px] hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow"
               id="language-dropdown-menu"
             >
               <ul className="py-2 font-medium" role="none">

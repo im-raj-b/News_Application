@@ -15,6 +15,10 @@ import NavBarContext from "../context/ShowNavBarContext";
 import LoadingBar from "react-top-loading-bar";
 import TopLoadingContext from "../context/TopLoadContext";
 import NavbarSwipe from "./SwipeNavBar";
+import India from "./country/India";
+import China from "./country/China";
+import Usa from "./country/Usa";
+import France from "./country/France";
 
 export default function NavBar({ countryLogo }) {
   const [darkMode, setDarkMode] = useState(light);
@@ -77,17 +81,22 @@ export default function NavBar({ countryLogo }) {
   //   // setCountry(e.target.textContent);
   // };
   let abbreVation;
+  let countrySVG;
   if (countryCon.state === "IN") {
     abbreVation = "(IN)";
+    countrySVG = <India />;
   }
   if (countryCon.state === "CH") {
     abbreVation = "(CH)";
+    countrySVG = <China />;
   }
   if (countryCon.state === "US") {
     abbreVation = "(US)";
+    countrySVG = <Usa />;
   }
   if (countryCon.state === "FR") {
     abbreVation = "(FR)";
+    countrySVG = <France />;
   }
 
   const showMenuModal = () => {
@@ -192,15 +201,24 @@ export default function NavBar({ countryLogo }) {
                 data-dropdown-toggle="language-dropdown-menu"
                 className="w-max inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900  rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
               >
-                <img
-                  src={countryCon.countryLogo}
+                {/* <img
+                  src={countrySVG}
                   alt=""
                   className="w-5 h-5 mr-2 rounded-full"
-                />
+                /> */}
+                {countryCon.state === "IN" ? (
+                  <India />
+                ) : countryCon.state === "US" ? (
+                  <Usa />
+                ) : countryCon.state === "CH" ? (
+                  <China />
+                ) : (
+                  <France />
+                )}
                 {countryCon.state}
               </button>
               <div
-                className="news-country-drop absolute z-50 top-[15px] hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-full"
+                className="news-country-drop absolute z-50 top-[15px] hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow"
                 id="language-dropdown-menu"
               >
                 <ul className="py-2 font-medium" role="none">
@@ -319,103 +337,58 @@ export default function NavBar({ countryLogo }) {
         </nav>
         {toggleNavBar.state && (
           //px-18 py-10
-          <div className="news-navbar-sec mb-0 md:px-10 text-white flex flex-nowrap gap-8 fixed justify-center z-10 sm:top-30  md:w-full sm:news-navbar-width overflow-x-scroll sm:overflow-x-auto top-10 ml-30 md:ml-0">
-            <nav className="flex md:flex-wrap sm:flex-none sm:justify-between">
-              <Link
-                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                to="/"
-              >
-                Home
-              </Link>
-              <Link
-                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                to="/tech"
-              >
-                Technology
-              </Link>
-              <Link
-                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                to="/science"
-              >
-                Science
-              </Link>
+          <div className="news-navbar-sec flex justify-center content-center">
+            <div className="mb-0 md:px-10 text-white flex flex-nowrap gap-8 fixed justify-center z-10 sm:top-30 w-1/2 sm:news-navbar-width overflow-x-scroll sm:overflow-x-auto top-10">
+              <nav className="flex md:flex-wrap sm:flex-none sm:justify-between">
+                <Link
+                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                  to="/"
+                >
+                  Home
+                </Link>
+                <Link
+                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                  to="/tech"
+                >
+                  Technology
+                </Link>
+                <Link
+                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                  to="/science"
+                >
+                  Science
+                </Link>
 
-              <Link
-                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                to="/sports"
-              >
-                Sports
-              </Link>
+                <Link
+                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                  to="/sports"
+                >
+                  Sports
+                </Link>
 
-              <Link
-                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                to="/business"
-              >
-                Business
-              </Link>
+                <Link
+                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                  to="/business"
+                >
+                  Business
+                </Link>
 
-              <Link
-                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                to="/entertainment"
-              >
-                Entertainment
-              </Link>
+                <Link
+                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                  to="/entertainment"
+                >
+                  Entertainment
+                </Link>
 
-              <Link
-                className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                to="/health"
-              >
-                Health
-              </Link>
-            </nav>
+                <Link
+                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                  to="/health"
+                >
+                  Health
+                </Link>
+              </nav>
+            </div>
           </div>
-          // <div className="news-navbar-sec mb-0 md:px-10 text-white flex flex-wrap md:flex-nowrap gap-8 fixed justify-center z-10 sm:top-30 md:w-full overflow-x-scroll sm:overflow-x-auto top-10 ml-30 md:ml-0">
-          //   <nav className="flex md:flex-wrap sm:flex-none sm:justify-between">
-          //     <Link
-          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-          //       to="/"
-          //     >
-          //       Home
-          //     </Link>
-          //     <Link
-          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-          //       to="/tech"
-          //     >
-          //       Technology
-          //     </Link>
-          //     <Link
-          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-          //       to="/science"
-          //     >
-          //       Science
-          //     </Link>
-          //     <Link
-          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-          //       to="/sports"
-          //     >
-          //       Sports
-          //     </Link>
-          //     <Link
-          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-          //       to="/business"
-          //     >
-          //       Business
-          //     </Link>
-          //     <Link
-          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-          //       to="/entertainment"
-          //     >
-          //       Entertainment
-          //     </Link>
-          //     <Link
-          //       className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-          //       to="/health"
-          //     >
-          //       Health
-          //     </Link>
-          //   </nav>
-          // </div>
-          // <NavbarSwipe />
         )}
         <LoadingBar
           color="#f11946"

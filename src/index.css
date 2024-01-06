@@ -102,9 +102,12 @@
   .news-navbar-sec {
     margin-top: 16px;
     padding: 0px;
-    right: 17px;
   }
 
+  .news-country-drop {
+    margin-left: -18px;
+    width: 110px;
+  }
   /* .news-navbar-sec {
     overflow-x: auto;
     white-space: nowrap;
