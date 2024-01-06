@@ -42,15 +42,8 @@ export default function NavigationBar({ countryLogo }) {
       if (!dropDownEle.classList.contains("hidden")) {
         dropDownEle.classList.toggle("hidden");
         navbarEle.classList.toggle("z-30");
-
-        // dropDownEle.classList.toggle("z-30");
       }
     });
-    // document.addEventListener("scrollend", () => {
-    //   console.log("Scrolling.......");
-    //   const dropDownEle = document.querySelector(".news-country-drop");
-    //   dropDownEle.classList.toggle("hidden");
-    // });
   }, []);
   const handleDarkMode = (e) => {
     console.log(e.target, "element");

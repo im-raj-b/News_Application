@@ -7,7 +7,7 @@ import frLogo from "../assets/france.svg";
 import dark from "../assets/dark.svg";
 import light from "../assets/light.svg";
 import news from "../assets/news_new.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import Switcher from "./DarkModeSwitcher";
 import CountryContext from "../context/CountryContext";
@@ -28,6 +28,7 @@ export default function NavBar({ countryLogo }) {
   const newsContext = createContext(dataNews);
   const toggleNavBar = useContext(NavBarContext);
   const topLoader = useContext(TopLoadingContext);
+  const location = useLocation();
   console.log(topLoader, "toploader");
 
   const supabase = createClient(
@@ -95,8 +96,9 @@ export default function NavBar({ countryLogo }) {
   };
 
   const selectCountry = async (e) => {
-    console.log(e.target.textContent, "txt");
-    console.log(e.target.getAttribute("data-country"), "data-Evnt");
+    console.log(location.pathname);
+
+    toggleNavBar.updateCurrentRoute(location.pathname);
     finalArray = [];
     let selectedCountry;
     if (e.target.getAttribute("data-country")) {

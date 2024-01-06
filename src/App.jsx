@@ -13,7 +13,6 @@ import news from "./assets/news.png";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import About from "./components/About";
-import CountryState from "./context/states/CountryState";
 import NavBarState from "./context/states/NavBarState";
 import LoadingBar from "react-top-loading-bar";
 import TopLoadingBar from "./context/states/TopLoadingBar";
@@ -21,6 +20,9 @@ import ActiveRouteState from "./context/states/ActiveRoute";
 import RouteContext from "./context/ActiveRouteContext";
 import SwipeHandler from "../SwipeHandler";
 import NavigationBar from "./components/NavigationBar";
+import NavBarContext from "./context/ShowNavBarContext";
+// import CountryContext from "./context/CountryContext";
+import CountryState from "./context/states/CountryState";
 
 const supabase = createClient(
   "https://tctywptybskokqycvohr.supabase.co",
@@ -34,26 +36,15 @@ function App() {
   const [selectUsa, setSelectUsa] = useState("/src/assets/us.svg");
   const [selectChina, setSelectChina] = useState("/src/assets/china.svg");
   const [selectFrance, setSelectFrance] = useState("/src/assets/france.svg");
+  const currentRoute = useContext(NavBarContext);
 
   const activeRoute = useContext(RouteContext);
-  console.log(activeRoute, "active");
+  // const country = useEffect(CountryContext);
+  console.log(activeRoute, "active", currentRoute);
   useEffect(function () {
     // swipeHandler();
   }, []);
 
-  // async function getCountries() {
-  //   const { data } = await supabase
-  //     .from("NewsData")
-  //     .select("dataUS")
-  //     .not("dataUS", "is", null);
-
-  //   data.forEach((ele) => {
-  //     if (ele.dataUS) {
-  //       finalArray.push(ele.dataUS);
-  //     }
-  //   });
-  //   setCount(finalArray);
-  // }
   const routes = [
     { path: "/", label: "Home" },
     { path: "/tech", label: "Technology" },
@@ -63,53 +54,6 @@ function App() {
     { path: "/entertainment", label: "Entertainment" },
     { path: "/health", label: "Health" },
   ];
-
-  // const swipeHandler = () => {
-  const history = useNavigate();
-  let touchStartX;
-
-  const handleTouchStart = (e) => {
-    touchStartX = e.touches[0].clientX;
-  };
-
-  const handleTouchMove = (e) => {
-    e.preventDefault();
-  };
-
-  const handleTouchEnd = (e) => {
-    if (!touchStartX) {
-      return;
-    }
-
-    const touchEndX = e.changedTouches[0].clientX;
-    const swipeDistance = touchEndX - touchStartX;
-
-    // Adjust this threshold as needed
-    const minSwipeDistance = 50;
-
-    if (swipeDistance > minSwipeDistance) {
-      // Swipe right, navigate to the previous route
-      const index = Math.max(
-        0,
-        routes.findIndex((route) => route.path === activeRoute.state) - 1
-      );
-      const previousRoute = routes[index].path;
-      history(previousRoute);
-      activeRoute.update(previousRoute);
-    } else if (swipeDistance < -minSwipeDistance) {
-      // Swipe left, navigate to the next route
-      const index = Math.min(
-        routes.length - 1,
-        routes.findIndex((route) => route.path === activeRoute.state) + 1
-      );
-      const nextRoute = routes[index].path;
-      history(nextRoute);
-      activeRoute.update(nextRoute);
-    }
-
-    touchStartX = null;
-  };
-  // };
 
   return (
     <>

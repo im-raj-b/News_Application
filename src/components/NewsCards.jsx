@@ -13,12 +13,14 @@ import NavBarContext from "../context/ShowNavBarContext";
 import TopLoadingContext from "../context/TopLoadContext";
 import CountryContext from "../context/CountryContext";
 import callForData from "../api/SupaBase";
+// import NavBarContext from "../context/ShowNavBarContext";
 
 const NewsCards = function ({ category, scrollPosition }) {
   const [dataNews, setDataNews] = useState([]);
   const [value, setValue] = useState("");
   const toggleNavBar = useContext(NavBarContext);
   const topLoadBar = useContext(TopLoadingContext);
+  // const currentNavbar = useContext(NavBarContext);
   // const news = useContext(newsContext);
   // console.log(news, "context");
   const countryData = useContext(CountryContext);
@@ -28,11 +30,32 @@ const NewsCards = function ({ category, scrollPosition }) {
   );
   let finalArray = [];
   topLoadBar.update(0);
+  console.log(toggleNavBar, "toggleNavBar-------");
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Show the button when the user scrolls down
+  const handleScroll = () => {
+    if (window.pageYOffset > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
+  // Scroll to top when the button is clicked
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Optional: add smooth scrolling behavior
+    });
+  };
 
   useEffect(
     function () {
       console.log("useEffect");
       console.log(callForData, "funnnnnn");
+      window.addEventListener("scroll", handleScroll);
       const ele = document.querySelectorAll(".news-list li").forEach((ele) => {
         console.log(ele, "elements");
 
@@ -43,14 +66,17 @@ const NewsCards = function ({ category, scrollPosition }) {
           //   e.target.parentElement.classList.remove("rounded");
           //   e.target.parentElement.classList.remove("h-6");
           // } else {
+          const allLiEle = document.querySelectorAll(".news-list li");
+          allLiEle.forEach((ele) => {
+            ele.classList.remove("bg-teal-300");
+            ele.classList.remove("rounded");
+            ele.classList.remove("h-6");
+          });
           e.target.parentElement.classList.add("bg-teal-300");
           e.target.parentElement.classList.add("rounded");
           e.target.parentElement.classList.add("h-6");
           // }
         });
-        ele.classList.remove("bg-teal-300");
-        ele.classList.remove("rounded");
-        ele.classList.remove("h-6");
       });
       console.log(ele, "Lists");
       const fetchData = async () => {
@@ -60,6 +86,10 @@ const NewsCards = function ({ category, scrollPosition }) {
       toggleNavBar.update(true);
       fetchData();
       topLoadBar.update(80);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
     },
     [value]
   );
@@ -270,6 +300,37 @@ const NewsCards = function ({ category, scrollPosition }) {
         <div className="mb-auto px-5 py-10 md:py-20 md:px-10 mt-10">
           <div className="mb-20 flex flex-col gap-10">
             <div className="flex flex-col gap-3">
+              <div
+                className={`scroll-to-top ${
+                  isVisible
+                    ? "visible dark:text-white text-yellow-500 z-30"
+                    : ""
+                }`}
+              >
+                {isVisible && (
+                  <button
+                    className="arrow"
+                    onClick={scrollToTop}
+                    title="Go to top"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-move-up"
+                    >
+                      <path d="M8 6L12 2L16 6" />
+                      <path d="M12 2V22" />
+                    </svg>
+                  </button>
+                )}
+              </div>
               <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
                 {countryData.allNewsData.map((ele) => {
                   // console.log(ele, "got it");

@@ -5,6 +5,8 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import NewsCards from "./components/NewsCards";
 import ActiveRouteState from "./context/states/ActiveRoute";
+import NavBarState from "./context/states/NavBarState";
+import CountryState from "./context/states/CountryState";
 
 // const router = createBrowserRouter([
 //   {
