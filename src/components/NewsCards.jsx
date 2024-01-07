@@ -230,90 +230,9 @@ const NewsCards = function ({ category, scrollPosition }) {
   return (
     <>
       <div className="justify-between mx-auto flex min-h-screen max-w-7xl flex-col relative top-20 custom-scrollbar max-h-full">
-        {/* <div className="mb-10 px-8 py-10 md:px-10 text-white flex flex-nowrap gap-8 fixed top-30 sm:top-30  w-full">
-          <nav class="flex flex-wrap sm:justify-between">
-            <Link
-              className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              to="/"
-            >
-              Home
-            </Link>
-            <Link
-              className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              to="/tech"
-            >
-              Technology
-            </Link>
-            <Link
-              className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              to="/science"
-            >
-              Science
-            </Link>
-
-            <Link
-              className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              to="/sports"
-            >
-              Sports
-            </Link>
-
-            <Link
-              className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              to="/business"
-            >
-              Business
-            </Link>
-
-            <Link
-              className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              to="/entertainment"
-            >
-              Entertainment
-            </Link>
-
-            <Link
-              className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-              to="/health"
-            >
-              Health
-            </Link>
-          </nav>
-        </div> */}
         <div className="mb-auto px-5 py-10 md:py-20 md:px-10 mt-10">
           <div className="mb-20 flex flex-col gap-10">
             <div className="flex flex-col gap-3">
-              {/* <div
-                className={`scroll-to-top ${
-                  isVisible
-                    ? "visible dark:text-white text-yellow-500 z-30"
-                    : ""
-                }`}
-              >
-                {isVisible && (
-                  <button
-                    className="arrow"
-                    onClick={scrollToTop}
-                    title="Go to top"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-move-up"
-                    >
-                      <path d="M8 6L12 2L16 6" />
-                      <path d="M12 2V22" />
-                    </svg>
-                  </button>
-                )}
-              </div> */}
               <ScrolltoTop />
               <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
                 {countryData.allNewsData.map((ele) => {

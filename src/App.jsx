@@ -42,7 +42,11 @@ function App() {
   // const country = useEffect(CountryContext);
   console.log(activeRoute, "active", currentRoute);
   useEffect(function () {
-    // swipeHandler();
+    // document.addEventListener("click", () => {
+    //   const dropDownEle = document.querySelector(".news-country-drop");
+    //   if (!dropDownEle.classList.contains("hidden"))
+    //     dropDownEle.classList.toggle("hidden");
+    // });
   }, []);
 
   const routes = [

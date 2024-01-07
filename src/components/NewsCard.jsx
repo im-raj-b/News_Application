@@ -101,7 +101,7 @@ const NewsCard = function ({ data, scrollPosition }) {
           </svg>
         </a>
       </div>
-      <span class="text-yellow-800 text-xs font-medium me-2 rounded dark:text-yellow-300">
+      <span className="text-yellow-800 text-xs font-medium me-2 rounded dark:text-yellow-300">
         Source: {data.source.name}
       </span>
     </div>

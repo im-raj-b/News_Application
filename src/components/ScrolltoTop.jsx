@@ -42,10 +42,10 @@ export default function ScrolltoTop() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
+            strokeWidth="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="lucide lucide-move-up"
+            className="lucide lucide-move-up"
           >
             <path d="M8 6L12 2L16 6" />
             <path d="M12 2V22" />

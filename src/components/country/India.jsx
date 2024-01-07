@@ -4,7 +4,7 @@ export default function India() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 900 600"
       className="w-5 h-5 mr-2 rounded-full"
     >
@@ -22,14 +22,14 @@ export default function India() {
                 <circle r="3.5" transform="rotate(7.5 -40 610.282)" />
                 <path d="m0 80 3-48-2-16.031V15h-2v.969L-3 32l3 48z" />
               </g>
-              <use xlink:href="#a" transform="rotate(15)" />
+              <use xlinkHref="#a" transform="rotate(15)" />
             </g>
-            <use xlink:href="#b" transform="rotate(30)" />
+            <use xlinkHref="#b" transform="rotate(30)" />
           </g>
-          <use xlink:href="#c" transform="rotate(60)" />
+          <use xlinkHref="#c" transform="rotate(60)" />
         </g>
-        <use xlink:href="#d" transform="rotate(120)" />
-        <use xlink:href="#d" transform="rotate(-120)" />
+        <use xlinkHref="#d" transform="rotate(120)" />
+        <use xlinkHref="#d" transform="rotate(-120)" />
       </g>
     </svg>
   );

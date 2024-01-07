@@ -11,6 +11,7 @@ import NavBarContext from "../context/ShowNavBarContext";
 import LoadingBar from "react-top-loading-bar";
 import TopLoadingContext from "../context/TopLoadContext";
 import NavBar from "./NavBar";
+import CommonNavBar from "./CommonNavBar";
 
 export default function NavigationBar({ countryLogo }) {
   const [darkMode, setDarkMode] = useState(light);
@@ -216,238 +217,16 @@ export default function NavigationBar({ countryLogo }) {
     />
   ) : (
     <div className="flex flex-row">
-      {/* <nav className="flex flex-row justify-between">
-        <div className="">
-          <span>
-            <Link className="flex items-center" to="/">
-              <img src={news} className="h-8 mr-3" alt="Logo" />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white">
-                News
-              </span>
-            </Link>
-          </span>
-        </div>
-        <div className="flex flex-row">
-          <span>
-            <Switcher />
-          </span>
-          <span>button</span>
-        </div>
-      </nav> */}
-      {/* <nav className="flex flex-row items-center justify-center">
-        <span>
-          <Link
-            className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-            to="/"
-          >
-            Home
-          </Link>
-        </span>
-        <span>
-          <Link
-            className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-            to="/tech"
-          >
-            Technology
-          </Link>
-        </span>
-        <span>
-          <Link
-            className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-            to="/science"
-          >
-            Science
-          </Link>
-        </span>
-        <span>
-          <Link
-            className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-            to="/sports"
-          >
-            Sports
-          </Link>
-        </span>
-        <span>
-          <Link
-            className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-            to="/business"
-          >
-            Business
-          </Link>
-        </span>
-        <span>
-          <Link
-            className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-            to="/entertainment"
-          >
-            Entertainment
-          </Link>
-        </span>
-        <span>
-          <Link
-            className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-            to="/health"
-          >
-            Health
-          </Link>
-        </span>
-        <span>
-          <Link
-            className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-            to="/about"
-          >
-            About
-          </Link>
-        </span>
-      </nav> */}
-      <nav className="border-gray-200 bg-back transition duration-200 dark:bg-gray-900 fixed top-0 z-10 p-5">
-        <div className="w-screen flex flex-wrap items-center justify-between p-5 mx-auto max-w-12xl px-2 sm:px-6 lg:px-8 news-navbar">
-          <div className="flex left-0 items-center ml-0">
-            <Link className="flex items-center" to="/">
-              <img src={news} className="h-8 mr-3" alt="Logo" />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white">
-                News
-              </span>
-            </Link>
-          </div>
-          <div className="relative flex items-center md:order-4 w-200 px-8">
-            <Switcher />
-
-            <button
-              onClick={changeCountry}
-              type="button"
-              data-dropdown-toggle="language-dropdown-menu"
-              className="w-max inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900  rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
-            >
-              <img
-                src={countryCon.countryLogo}
-                alt=""
-                className="w-5 h-5 mr-2 rounded-full"
-              />
-              {countryCon.state}
-            </button>
-
-            <div
-              className="news-country-drop absolute top-[15px] hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow"
-              id="language-dropdown-menu"
-            >
-              <ul className="py-2 font-medium" role="none">
-                <li>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                    role="menuitem"
-                  >
-                    <div
-                      className="inline-flex items-center gap-2"
-                      onClick={selectCountry}
-                    >
-                      <img
-                        src={countryLogo.in}
-                        alt=""
-                        className="h-7 w-7"
-                        data-country="India"
-                      />
-                      IN
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                    role="menuitem"
-                  >
-                    <div
-                      className="inline-flex items-center gap-2"
-                      onClick={selectCountry}
-                    >
-                      <img
-                        src={countryLogo.us}
-                        alt=""
-                        className="h-7 w-7"
-                        data-country="USA"
-                      />
-                      US
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                    role="menuitem"
-                  >
-                    <div
-                      className="inline-flex items-center gap-2"
-                      onClick={selectCountry}
-                    >
-                      <img
-                        src={countryLogo.ch}
-                        alt=""
-                        className="h-7 w-7"
-                        data-country="China"
-                      />
-                      CH
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                    role="menuitem"
-                  >
-                    <div
-                      className="inline-flex items-center gap-2"
-                      onClick={selectCountry}
-                    >
-                      <img
-                        src={countryLogo.fr}
-                        alt=""
-                        srcset=""
-                        className="h-7 w-7"
-                        data-country="France"
-                      />
-                      FR
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          {/* <div
-              className="news-modal news-sm-modal relative items-center justify-between hidden w-450 md:flex md:w-auto md:order-1"
-              id="navbar-language"
-            >
-              <ul className="flex flex-col  font-medium items-center justify-center p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 md:mt-0 md:border-0">
-                <li className="block py-2 pl-3 pr-4 text-gray-900 dark:text-white">
-                  <Link to="/">Home</Link>
-                </li>
-                <li className="block py-2 pl-3 pr-4 text-gray-900 dark:text-white">
-                  <Link to="/about">About</Link>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="block py-2 pl-3 pr-4 text-gray-900 dark:text-white"
-                  >
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div> */}
-        </div>
-      </nav>
+      <CommonNavBar />
       {toggleNavBar.state && (
-        <div class="fixed nw-bar top-20 z-30 nw-margin left-1/2 transform -translate-x-1/2 inline-flex mx-auto justify-between bg-blue-600 w-11/12 rounded-3xl h-50">
-          <div class="news-list overflow-x-scroll overflow-y-hidden scroll-smooth">
+        <div className="fixed nw-bar top-20 z-30 nw-margin left-1/2 transform -translate-x-1/2 inline-flex mx-auto justify-between bg-blue-600 w-11/12 rounded-3xl h-50">
+          <div className="news-list overflow-x-scroll overflow-y-hidden scroll-smooth">
             <ul
-              class="relative flex justify-normal p-1 list-none rounded-lg bg-blue-gray-50/60"
+              className="relative flex justify-normal p-1 list-none rounded-lg bg-blue-gray-50/60"
               data-tabs="tabs"
               role="list"
             >
-              <li class="flex-auto text-center">
+              <li className="flex-auto text-center">
                 <Link
                   className="px-4 py-2 text-black font-semibold hover:text-yellow-500 rounded-sm"
                   to="/"
@@ -455,7 +234,7 @@ export default function NavigationBar({ countryLogo }) {
                   Home
                 </Link>
               </li>
-              <li class="flex-auto text-center">
+              <li className="flex-auto text-center">
                 <Link
                   className="px-4 py-2 text-black font-semibold hover:text-yellow-500 "
                   to="/tech"
@@ -463,39 +242,7 @@ export default function NavigationBar({ countryLogo }) {
                   Technology
                 </Link>
               </li>
-              <li class="flex-auto text-center">
-                <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
-                  to="/science"
-                >
-                  Science
-                </Link>
-              </li>
-              <li class="flex-auto text-center">
-                <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
-                  to="/sports"
-                >
-                  Sports
-                </Link>
-              </li>
-              <li class="flex-auto text-center">
-                <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
-                  to="/business"
-                >
-                  Business
-                </Link>
-              </li>
-              <li class="flex-auto text-center">
-                <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
-                  to="/entertainment"
-                >
-                  Entertainment
-                </Link>
-              </li>
-              <li class="flex-auto text-center">
+              <li className="flex-auto text-center">
                 <Link
                   className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
                   to="/health"
@@ -503,19 +250,51 @@ export default function NavigationBar({ countryLogo }) {
                   Health
                 </Link>
               </li>
+              <li className="flex-auto text-center">
+                <Link
+                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
+                  to="/science"
+                >
+                  Science
+                </Link>
+              </li>
+              <li className="flex-auto text-center">
+                <Link
+                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
+                  to="/sports"
+                >
+                  Sports
+                </Link>
+              </li>
+              <li className="flex-auto text-center">
+                <Link
+                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
+                  to="/business"
+                >
+                  Business
+                </Link>
+              </li>
+              <li className="flex-auto text-center">
+                <Link
+                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
+                  to="/entertainment"
+                >
+                  Entertainment
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
       )}
       {/* {toggleNavBar.state && (
-        <div class="w-full relative right-0 top-20">
-          <div class="w-full relative right-0 top-10 bg-blue-400">
+        <div className="w-full relative right-0 top-20">
+          <div className="w-full relative right-0 top-10 bg-blue-400">
             <ul
-              class="relative flex flex-wrap p-1 list-none rounded-lg bg-blue-gray-50/60"
+              className="relative flex flex-wrap p-1 list-none rounded-lg bg-blue-gray-50/60"
               data-tabs="tabs"
               role="list"
             >
-              <li class="flex-auto text-center">
+              <li className="flex-auto text-center">
                 <Link
                   className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
                   to="/"
@@ -523,7 +302,7 @@ export default function NavigationBar({ countryLogo }) {
                   Home
                 </Link>
               </li>
-              <li class="flex-auto text-center">
+              <li className="flex-auto text-center">
                 <Link
                   className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
                   to="/tech"
@@ -531,7 +310,7 @@ export default function NavigationBar({ countryLogo }) {
                   Technology
                 </Link>
               </li>
-              <li class="flex-auto text-center">
+              <li className="flex-auto text-center">
                 <Link
                   className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
                   to="/science"
@@ -539,7 +318,7 @@ export default function NavigationBar({ countryLogo }) {
                   Science
                 </Link>
               </li>
-              <li class="flex-auto text-center">
+              <li className="flex-auto text-center">
                 <Link
                   className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
                   to="/sports"
@@ -547,7 +326,7 @@ export default function NavigationBar({ countryLogo }) {
                   Sports
                 </Link>
               </li>
-              <li class="flex-auto text-center">
+              <li className="flex-auto text-center">
                 <Link
                   className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
                   to="/business"
@@ -555,7 +334,7 @@ export default function NavigationBar({ countryLogo }) {
                   Business
                 </Link>
               </li>
-              <li class="flex-auto text-center">
+              <li className="flex-auto text-center">
                 <Link
                   className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
                   to="/entertainment"
@@ -563,7 +342,7 @@ export default function NavigationBar({ countryLogo }) {
                   Entertainment
                 </Link>
               </li>
-              <li class="flex-auto text-center">
+              <li className="flex-auto text-center">
                 <Link
                   className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
                   to="/health"
