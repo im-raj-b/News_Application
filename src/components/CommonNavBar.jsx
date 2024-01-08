@@ -128,8 +128,8 @@ export default function CommonNavBar() {
   };
 
   return (
-    <nav className="border-gray-200 bg-back transition duration-200 dark:bg-gray-900 fixed top-5 z-10 p-0">
-      <div className="w-screen flex flex-wrap items-center justify-between content-center p-5 mx-auto max-w-12xl px-2 sm:px-6 lg:px-8 news-navbar">
+    <nav className="border-gray-200 bg-back transition duration-200 dark:bg-gray-900 fixed top-0 z-10 p-2">
+      <div className="w-screen h-500 flex flex-wrap items-center justify-between content-center p-5 mx-auto max-w-12xl px-2 sm:px-6 lg:px-8 news-navbar">
         <div className="flex left-0 items-center ml-0">
           <Link className="flex items-center" to="/">
             {/* <img src={news} className="h-8 mr-3" alt="Logo" /> */}
@@ -155,7 +155,7 @@ export default function CommonNavBar() {
             </span> */}
           </Link>
         </div>
-        <div className="relative flex items-center md:order-4 w-200 px-1">
+        <div className="relative flex items-center md:order-4 w-200 px-1 nw-logo">
           <Switcher />
           <button
             onClick={changeCountry}

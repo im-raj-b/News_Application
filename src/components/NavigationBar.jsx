@@ -194,6 +194,12 @@ export default function NavigationBar({ countryLogo }) {
   ) : (
     <div className="flex flex-row">
       <CommonNavBar />
+      <LoadingBar
+        color="#f11946"
+        progress={topLoader.state}
+        height={5}
+        // onLoaderFinished={1}
+      />
       {toggleNavBar.state && (
         <div className="fixed nw-bar top-20 z-30 nw-margin left-1/2 transform -translate-x-1/2 inline-flex mx-auto justify-between bg-blue-600 w-11/12 rounded-3xl h-50 p-2">
           <div className="news-list overflow-x-scroll overflow-y-hidden scroll-smooth nw-faded-overflow">
