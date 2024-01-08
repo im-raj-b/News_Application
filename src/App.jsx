@@ -3,13 +3,6 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import { createClient } from "@supabase/supabase-js";
 import NewsCards from "./components/NewsCards";
-// import indiaLogo from "./assets/india.svg";
-// import usLogo from "./assets/us.svg";
-// import chLogo from "./assets/china.svg";
-// import frLogo from "./assets/france.svg";
-// import dark from "./assets/dark.svg";
-// import light from "./assets/light.svg";
-import news from "./assets/news.png";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import About from "./components/About";
@@ -31,11 +24,6 @@ const supabase = createClient(
 let finalArray = [];
 function App() {
   // const [count, setCount] = useState([]);
-  const [defaultCountry, setDefaultCountry] = useState("/src/assets/in.png");
-  const [selectIndia, setSelectIndia] = useState("/src/assets/in.png");
-  const [selectUsa, setSelectUsa] = useState("/src/assets/us.png");
-  const [selectChina, setSelectChina] = useState("/src/assets/ch.png");
-  const [selectFrance, setSelectFrance] = useState("/src/assets/fr.png");
   const currentRoute = useContext(NavBarContext);
 
   const activeRoute = useContext(RouteContext);
@@ -73,15 +61,7 @@ function App() {
                 default: defaultCountry,
               }}
             /> */}
-            <NavigationBar
-              countryLogo={{
-                in: selectIndia,
-                us: selectUsa,
-                ch: selectChina,
-                fr: selectFrance,
-                default: defaultCountry,
-              }}
-            />
+            <NavigationBar />
             {/* <LoadingBar
               color="#f11946"
               progress={50}

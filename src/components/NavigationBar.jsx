@@ -1,8 +1,6 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import news from "../assets/news_new.png";
-import dark from "../assets/dark.svg";
-import light from "../assets/light.svg";
 
 import { createClient } from "@supabase/supabase-js";
 import Switcher from "./DarkModeSwitcher";
@@ -14,13 +12,7 @@ import NavBar from "./NavBar";
 import CommonNavBar from "./CommonNavBar";
 
 export default function NavigationBar({ countryLogo }) {
-  const [darkMode, setDarkMode] = useState(light);
   const countryCon = useContext(CountryContext);
-  const [defaultCountry, setDefaultCountry] = useState("/src/assets/in.png");
-  const [selectIndia, setSelectIndia] = useState("/src/assets/in.png");
-  const [selectUsa, setSelectUsa] = useState("/src/assets/us.png");
-  const [selectChina, setSelectChina] = useState("/src/assets/ch.png");
-  const [selectFrance, setSelectFrance] = useState("/src/assets/fr.png");
   const [dataNews, setDataNews] = useState([]);
   const newsContext = createContext(dataNews);
   const toggleNavBar = useContext(NavBarContext);
@@ -52,14 +44,6 @@ export default function NavigationBar({ countryLogo }) {
 
     if (document.documentElement.classNameList.contains("dark")) {
       document.documentElement.classNameList.remove("dark");
-    }
-  };
-
-  const changeIcon = (e) => {
-    if (darkMode === "/src/assets/dark.svg") {
-      setDarkMode(light);
-    } else {
-      setDarkMode(dark);
     }
   };
 
@@ -206,21 +190,13 @@ export default function NavigationBar({ countryLogo }) {
   };
   const bool = window.mobileCheck();
   return !bool ? (
-    <NavBar
-      countryLogo={{
-        in: selectIndia,
-        us: selectUsa,
-        ch: selectChina,
-        fr: selectFrance,
-        default: defaultCountry,
-      }}
-    />
+    <NavBar />
   ) : (
     <div className="flex flex-row">
       <CommonNavBar />
       {toggleNavBar.state && (
-        <div className="fixed nw-bar top-20 z-30 nw-margin left-1/2 transform -translate-x-1/2 inline-flex mx-auto justify-between bg-blue-600 w-11/12 rounded-3xl h-50">
-          <div className="news-list overflow-x-scroll overflow-y-hidden scroll-smooth">
+        <div className="fixed nw-bar top-20 z-30 nw-margin left-1/2 transform -translate-x-1/2 inline-flex mx-auto justify-between bg-blue-600 w-11/12 rounded-3xl h-50 p-2">
+          <div className="news-list overflow-x-scroll overflow-y-hidden scroll-smooth nw-faded-overflow">
             <ul
               className="relative flex justify-normal p-1 list-none rounded-lg bg-blue-gray-50/60"
               data-tabs="tabs"

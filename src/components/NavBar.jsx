@@ -1,12 +1,5 @@
 import React, { useState, createContext, useContext } from "react";
 import "../App.css";
-import indiaLogo from "../assets/india.svg";
-import usLogo from "../assets/us.svg";
-import chLogo from "../assets/china.svg";
-import frLogo from "../assets/france.svg";
-import dark from "../assets/dark.svg";
-import light from "../assets/light.svg";
-import news from "../assets/news_new.png";
 import { Link } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import Switcher from "./DarkModeSwitcher";
@@ -21,8 +14,7 @@ import Usa from "./country/Usa";
 import France from "./country/France";
 import CommonNavBar from "./CommonNavBar";
 
-export default function NavBar({ countryLogo }) {
-  const [darkMode, setDarkMode] = useState(light);
+export default function NavBar() {
   const countryCon = useContext(CountryContext);
   const [dataNews, setDataNews] = useState([]);
   const newsContext = createContext(dataNews);

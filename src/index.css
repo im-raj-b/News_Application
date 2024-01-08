@@ -108,6 +108,11 @@
     margin-left: -18px;
     width: 110px;
   }
+
+  .nw-logo {
+    margin-left: 10px;
+  }
+
   /* .news-navbar-sec {
     overflow-x: auto;
     white-space: nowrap;

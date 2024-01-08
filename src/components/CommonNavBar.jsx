@@ -1,7 +1,6 @@
 import React from "react";
 import Switcher from "./DarkModeSwitcher";
-import dark from "../assets/dark.svg";
-import light from "../assets/light.svg";
+
 import news from "../assets/news_new.png";
 import { Link, useLocation } from "react-router-dom";
 import CountryContext from "../context/CountryContext";
@@ -14,7 +13,6 @@ import { createClient } from "@supabase/supabase-js";
 import filterData from "./utility";
 
 export default function CommonNavBar() {
-  const [darkMode, setDarkMode] = useState(light);
   const countryCon = useContext(CountryContext);
   const [dataNews, setDataNews] = useState([]);
   const location = useLocation();
@@ -130,17 +128,34 @@ export default function CommonNavBar() {
   };
 
   return (
-    <nav className="border-gray-200 bg-back transition duration-200 dark:bg-gray-900 fixed top-0 z-10 p-5">
-      <div className="w-screen flex flex-wrap items-center justify-between p-5 mx-auto max-w-12xl px-2 sm:px-6 lg:px-8 news-navbar">
+    <nav className="border-gray-200 bg-back transition duration-200 dark:bg-gray-900 fixed top-5 z-10 p-0">
+      <div className="w-screen flex flex-wrap items-center justify-between content-center p-5 mx-auto max-w-12xl px-2 sm:px-6 lg:px-8 news-navbar">
         <div className="flex left-0 items-center ml-0">
           <Link className="flex items-center" to="/">
-            <img src={news} className="h-8 mr-3" alt="Logo" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white">
+            {/* <img src={news} className="h-8 mr-3" alt="Logo" /> */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              className="lucide lucide-newspaper h-8 w-8 dark:text-white text-gray-900 nw-logo"
+            >
+              <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
+              <path d="M18 14h-8" />
+              <path d="M15 18h-5" />
+              <path d="M10 6h8v4h-8V6Z" />
+            </svg>
+            {/* <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white p-2">
               News
-            </span>
+            </span> */}
           </Link>
         </div>
-        <div className="relative flex items-center md:order-4 w-200 px-8">
+        <div className="relative flex items-center md:order-4 w-200 px-1">
           <Switcher />
           <button
             onClick={changeCountry}
