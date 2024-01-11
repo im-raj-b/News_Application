@@ -28,25 +28,26 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="dark:text-white text-black py-10 relative top-10 dark:bg-gray-900">
+      <section className="dark:text-white text-black py-10 relative top-10 dark:bg-gray-900 h-64">
         <div className="container mx-auto text-center p-5">
           <h1 className="text-5xl font-bold">News</h1>
           <p className="mt-4 text-lg">Daily news dose</p>
 
           <div
             id="typewriter"
-            className="text-2xl font-bold overflow-hidden"
+            className="text-2xl font-bold overflow-hidden w-50"
           ></div>
-          <button
-            onClick={showBar}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 mt-8 rounded-full"
-          >
-            <Link to="/main">Fetch News</Link>
-          </button>
         </div>
       </section>
-
-      <section className="py-20 min-w-fit">
+      <div className="relative top-10 flex justify-center">
+        <button
+          onClick={showBar}
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 mt-8 rounded-full"
+        >
+          <Link to="/main">Fetch News</Link>
+        </button>
+      </div>
+      <section className="py-20">
         <div className="container mx-auto text-center p-10 ">
           <h2 className="text-3xl dark:text-white font-bold">
             What you'll get
