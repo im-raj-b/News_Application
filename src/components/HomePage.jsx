@@ -47,7 +47,7 @@ export default function HomePage() {
           <Link to="/main">Fetch News</Link>
         </button>
       </div>
-      <section className="py-20">
+      <section className="py-20 min-w-fit">
         <div className="container mx-auto text-center p-10 ">
           <h2 className="text-3xl dark:text-white font-bold">
             What you'll get
