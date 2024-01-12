@@ -9,9 +9,7 @@ const supabase = createClient(
 
 export default async function callForData({ category, countryData }) {
   let tableName;
-  console.log("Before context");
 
-  console.log(countryData, "context......");
   if (countryData) {
     if (countryData.state.toLowerCase() === "india") {
       tableName = "India_duplicate";

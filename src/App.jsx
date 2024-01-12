@@ -11,10 +11,9 @@ import LoadingBar from "react-top-loading-bar";
 import TopLoadingBar from "./context/states/TopLoadingBar";
 import ActiveRouteState from "./context/states/ActiveRoute";
 import RouteContext from "./context/ActiveRouteContext";
-import SwipeHandler from "../SwipeHandler";
 import NavigationBar from "./components/NavigationBar";
 import NavBarContext from "./context/ShowNavBarContext";
-// import CountryContext from "./context/CountryContext";
+import CountryContext from "./context/CountryContext";
 import CountryState from "./context/states/CountryState";
 import Spinner from "./components/Spinner";
 
@@ -24,17 +23,16 @@ const supabase = createClient(
 );
 let finalArray = [];
 function App() {
-  // const [count, setCount] = useState([]);
   const currentRoute = useContext(NavBarContext);
 
   const activeRoute = useContext(RouteContext);
-  // const country = useEffect(CountryContext);
-  console.log(activeRoute, "active", currentRoute);
+  const country = useContext(CountryContext);
   useEffect(function () {
     // document.addEventListener("click", () => {
-    //   const dropDownEle = document.querySelector(".news-country-drop");
-    //   if (!dropDownEle.classList.contains("hidden"))
+    //   if (country.modalState) {
+    //     const dropDownEle = document.querySelector(".news-country-drop");
     //     dropDownEle.classList.toggle("hidden");
+    //   }
     // });
   }, []);
 

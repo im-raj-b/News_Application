@@ -24,62 +24,18 @@ export default function NavigationBar({ countryLogo }) {
   );
   let finalArray = [];
 
-  console.log(countryCon, "countryCon");
   useEffect(() => {
     document.addEventListener("scroll", (e) => {
-      console.log("Scrolling.......");
-
       const dropDownEle = document.querySelector(".news-country-drop");
       const navbarEle = document.querySelector(".nw-bar");
 
       if (!dropDownEle.classList.contains("hidden")) {
         dropDownEle.classList.toggle("hidden");
-        navbarEle.classList.toggle("z-30");
+        navbarEle.classList.toggle("hidden");
       }
     });
   }, []);
-  const handleDarkMode = (e) => {
-    console.log(e.target, "element");
-    console.log(e, "element");
 
-    if (document.documentElement.classNameList.contains("dark")) {
-      document.documentElement.classNameList.remove("dark");
-    }
-  };
-
-  const changeCategory = (e) => {
-    const dropDownEle = document.querySelector(".category-drop");
-    dropDownEle.classList.toggle("hidden");
-
-    // console.log(e);
-  };
-
-  const changeCountry = (e) => {
-    const dropDownEle = document.querySelector(".news-country-drop");
-    const navbarEle = document.querySelector(".nw-bar");
-    dropDownEle.classList.toggle("hidden");
-    dropDownEle.classList.toggle("z-30");
-    navbarEle.classList.toggle("z-30");
-    // if (!dropDownEle.classList.contains("z-30")) {
-    //   dropDownEle.classList.toggle("z-30");
-    // }
-    // // dropDownEle.classList.toggle("z-30");
-    // if (!navbarEle.classList.contains("z-30")) {
-    //   navbarEle.classList.toggle("z-30");
-    // }
-
-    // console.log(e);
-  };
-
-  const countryElements = document.querySelectorAll(".news-country-drop li");
-  console.log(countryElements, "ele");
-
-  // countryElements.addEventListener("click", selectCountry);
-
-  // const selectCountry = (e) => {
-  //   console.log(e.target.textContent);
-  //   // setCountry(e.target.textContent);
-  // };
   let abbreVation;
   if (countryCon.state === "IN") {
     abbreVation = "(IN)";
@@ -94,85 +50,6 @@ export default function NavigationBar({ countryLogo }) {
     abbreVation = "(FR)";
   }
 
-  const showMenuModal = () => {
-    const modalEle = document.querySelector(".news-modal");
-    modalEle.classList.toggle("hidden");
-  };
-
-  const selectCountry = async (e) => {
-    console.log(e.target.textContent, "txt");
-    console.log(e.target.getAttribute("data-country"), "data-Evnt");
-    finalArray = [];
-    let selectedCountry;
-    if (e.target.getAttribute("data-country")) {
-      selectedCountry = e.target.getAttribute("data-country");
-    }
-    if (e.target.textContent) {
-      selectedCountry = e.target.textContent;
-    }
-    // setCountry(selectedCountry);
-
-    countryCon.update(selectedCountry);
-    if (selectedCountry.toLowerCase() === "us") {
-      countryCon.updateLogo("/src/assets/us.svg");
-      const { data } = await supabase
-        .from("USA_duplicate")
-        .select("technology")
-        .not("technology", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.technology) {
-          finalArray.push(ele.technology);
-        }
-      });
-      countryCon.setData(finalArray);
-    }
-
-    if (selectedCountry.toLowerCase() === "in") {
-      countryCon.updateLogo("/src/assets/india.svg");
-      const { data } = await supabase
-        .from("India_duplicate")
-        .select("business")
-        .not("business", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.business) {
-          finalArray.push(ele.business);
-        }
-      });
-      countryCon.setData(finalArray);
-    }
-
-    if (selectedCountry.toLowerCase() === "ch") {
-      countryCon.updateLogo("/src/assets/china.svg");
-      const { data } = await supabase
-        .from("China_duplicate")
-        .select("technology")
-        .not("technology", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.technology) {
-          finalArray.push(ele.technology);
-        }
-      });
-      countryCon.setData(finalArray);
-    }
-
-    if (selectedCountry.toLowerCase() === "fr") {
-      countryCon.updateLogo("/src/assets/france.svg");
-      const { data } = await supabase
-        .from("France_duplicate")
-        .select("health")
-        .not("health", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.health) {
-          finalArray.push(ele.health);
-        }
-      });
-      countryCon.setData(finalArray);
-    }
-  };
   window.mobileCheck = function () {
     let check = false;
     (function (a) {

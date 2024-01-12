@@ -8,24 +8,17 @@ import {
 } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import NewsCard from "./NewsCard";
-import { Link } from "react-router-dom";
 import NavBarContext from "../context/ShowNavBarContext";
 import TopLoadingContext from "../context/TopLoadContext";
 import CountryContext from "../context/CountryContext";
-import callForData from "../api/SupaBase";
-// import NavBarContext from "../context/ShowNavBarContext";
 import filterData from "./utility";
 import ScrolltoTop from "./ScrolltoTop";
 import Spinner from "./Spinner";
 
-const NewsCards = function ({ category, scrollPosition }) {
+const NewsCards = function ({ category }) {
   const [dataNews, setDataNews] = useState([]);
-  const [value, setValue] = useState("");
   const toggleNavBar = useContext(NavBarContext);
   const topLoadBar = useContext(TopLoadingContext);
-  // const currentNavbar = useContext(NavBarContext);
-  // const news = useContext(newsContext);
-  // console.log(news, "context");
   const countryData = useContext(CountryContext);
   const supabase = createClient(
     "https://tctywptybskokqycvohr.supabase.co",
@@ -41,12 +34,6 @@ const NewsCards = function ({ category, scrollPosition }) {
       console.log(ele, "elements");
 
       ele.addEventListener("click", (e) => {
-        console.log(e);
-        // if (e.target.parentElement.classList.contains("bg-teal-300")) {
-        //   e.target.parentElement.classList.remove("bg-teal-300");
-        //   e.target.parentElement.classList.remove("rounded");
-        //   e.target.parentElement.classList.remove("h-6");
-        // } else {
         const allLiEle = document.querySelectorAll(".news-list li");
         allLiEle.forEach((ele) => {
           ele.classList.remove("bg-teal-300");
@@ -56,7 +43,6 @@ const NewsCards = function ({ category, scrollPosition }) {
         e.target.parentElement.classList.add("bg-teal-300");
         e.target.parentElement.classList.add("rounded");
         e.target.parentElement.classList.add("h-6");
-        // }
       });
     });
     console.log(ele, "Lists");

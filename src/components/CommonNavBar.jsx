@@ -1,7 +1,5 @@
 import React from "react";
 import Switcher from "./DarkModeSwitcher";
-
-import news from "../assets/news_new.png";
 import { Link, useLocation } from "react-router-dom";
 import CountryContext from "../context/CountryContext";
 import India from "./country/India";
@@ -14,7 +12,6 @@ import filterData from "./utility";
 
 export default function CommonNavBar() {
   const countryCon = useContext(CountryContext);
-  const [dataNews, setDataNews] = useState([]);
   const location = useLocation();
   const supabase = createClient(
     "https://tctywptybskokqycvohr.supabase.co",
@@ -27,13 +24,19 @@ export default function CommonNavBar() {
     const dropDownEle = document.querySelector(".news-country-drop");
     const navbarEle = document.querySelector(".nw-bar");
     if (navbarEle) {
-      dropDownEle.classList.toggle("hidden");
-      dropDownEle.classList.toggle("z-30");
-
-      navbarEle.classList.toggle("z-30");
+      if (dropDownEle.classList.contains("hidden")) {
+        dropDownEle.classList.remove("hidden");
+        navbarEle.classList.add("hidden");
+      } else {
+        dropDownEle.classList.add("hidden");
+      }
+      countryCon.modalUpdate(true);
     } else {
-      dropDownEle.classList.toggle("hidden");
-      dropDownEle.classList.toggle("z-30");
+      if (dropDownEle.classList.contains("hidden")) {
+        dropDownEle.classList.remove("hidden");
+      } else {
+        dropDownEle.classList.add("hidden");
+      }
       // window.addEventListener("click", () => {
       //   if (dropDownEle.classList.contains("hidden"))
       //     dropDownEle.classList.toggle("hidden");
@@ -47,8 +50,6 @@ export default function CommonNavBar() {
     // if (!navbarEle.classList.contains("z-30")) {
     //   navbarEle.classList.toggle("z-30");
     // }
-
-    // console.log(e);
   };
 
   const selectCountry = async (e) => {
@@ -108,8 +109,12 @@ export default function CommonNavBar() {
         tableName = "India_duplicate";
         break;
     }
+    const dropDownEle = document.querySelector(".news-country-drop");
+    const navbarEle = document.querySelector(".nw-bar");
 
-    console.log(tableName, currentColumn);
+    dropDownEle.classList.toggle("hidden");
+    navbarEle.classList.remove("hidden");
+
     if (path !== "/") {
       const { data } = await supabase
         .from(tableName)
@@ -122,7 +127,6 @@ export default function CommonNavBar() {
         }
       });
       const filteredData = filterData(finalArray);
-      console.log(finalArray, "Common navigation");
       countryCon.setData(filteredData);
       countryCon.updateLoad(false);
     }
@@ -151,30 +155,29 @@ export default function CommonNavBar() {
               <path d="M15 18h-5" />
               <path d="M10 6h8v4h-8V6Z" />
             </svg>
-            {/* <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white p-2">
-              News
-            </span> */}
           </Link>
         </div>
         <div className="relative flex items-center md:order-4 w-200 px-1 nw-logo">
           <Switcher />
-          <button
-            onClick={changeCountry}
-            type="button"
-            data-dropdown-toggle="language-dropdown-menu"
-            className="w-max inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900  rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
-          >
-            {countryCon.state === "IN" ? (
-              <India />
-            ) : countryCon.state === "US" ? (
-              <Usa />
-            ) : countryCon.state === "CH" ? (
-              <China />
-            ) : (
-              <France />
-            )}
-            {countryCon.state}
-          </button>
+          <div className="w-24">
+            <button
+              onClick={changeCountry}
+              type="button"
+              data-dropdown-toggle="language-dropdown-menu"
+              className="w-max inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900  rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
+            >
+              {countryCon.state === "IN" ? (
+                <India />
+              ) : countryCon.state === "US" ? (
+                <Usa />
+              ) : countryCon.state === "CH" ? (
+                <China />
+              ) : (
+                <France />
+              )}
+              {countryCon.state}
+            </button>
+          </div>
           <div
             className="news-country-drop absolute z-50 top-[15px] hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow"
             id="language-dropdown-menu"

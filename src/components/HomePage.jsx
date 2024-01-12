@@ -16,6 +16,10 @@ export default function HomePage() {
   }, []);
   const showBar = () => {
     toggleNavBar.update(true);
+    const dropDownEle = document.querySelector(".news-country-drop");
+    if (!dropDownEle.classList.contains("hidden")) {
+      dropDownEle.classList.toggle("hidden");
+    }
   };
   topLoader.update(100);
 
