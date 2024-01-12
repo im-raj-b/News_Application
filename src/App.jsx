@@ -16,6 +16,7 @@ import NavigationBar from "./components/NavigationBar";
 import NavBarContext from "./context/ShowNavBarContext";
 // import CountryContext from "./context/CountryContext";
 import CountryState from "./context/states/CountryState";
+import Spinner from "./components/Spinner";
 
 const supabase = createClient(
   "https://tctywptybskokqycvohr.supabase.co",

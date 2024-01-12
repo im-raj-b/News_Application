@@ -6,6 +6,7 @@ const CountryState = (props) => {
   const [countryState, setCountryState] = useState("IN");
   const [newsData, setNewsData] = useState([]);
   const [logo, setLogo] = useState("/src/assets/india.svg");
+  const [isLoading, setLoader] = useState(true);
   const updateCountryState = (params) => {
     setCountryState(params);
   };
@@ -16,6 +17,9 @@ const CountryState = (props) => {
   const updateCountryLogo = (params) => {
     setLogo(params);
   };
+  const updateLoaderSate = (params) => {
+    setLoader(params);
+  };
   return (
     <CountryContext.Provider
       value={{
@@ -25,6 +29,8 @@ const CountryState = (props) => {
         allNewsData: newsData,
         countryLogo: logo,
         updateLogo: updateCountryLogo,
+        loaderState: isLoading,
+        updateLoad: updateLoaderSate,
       }}
     >
       {props.children}

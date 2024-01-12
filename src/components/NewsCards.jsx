@@ -16,6 +16,7 @@ import callForData from "../api/SupaBase";
 // import NavBarContext from "../context/ShowNavBarContext";
 import filterData from "./utility";
 import ScrolltoTop from "./ScrolltoTop";
+import Spinner from "./Spinner";
 
 const NewsCards = function ({ category, scrollPosition }) {
   const [dataNews, setDataNews] = useState([]);
@@ -34,40 +35,39 @@ const NewsCards = function ({ category, scrollPosition }) {
   topLoadBar.update(0);
   console.log(toggleNavBar, "toggleNavBar-------");
 
-  useEffect(
-    function () {
-      const ele = document.querySelectorAll(".news-list li").forEach((ele) => {
-        console.log(ele, "elements");
+  useEffect(function () {
+    countryData.updateLoad(true);
+    const ele = document.querySelectorAll(".news-list li").forEach((ele) => {
+      console.log(ele, "elements");
 
-        ele.addEventListener("click", (e) => {
-          console.log(e);
-          // if (e.target.parentElement.classList.contains("bg-teal-300")) {
-          //   e.target.parentElement.classList.remove("bg-teal-300");
-          //   e.target.parentElement.classList.remove("rounded");
-          //   e.target.parentElement.classList.remove("h-6");
-          // } else {
-          const allLiEle = document.querySelectorAll(".news-list li");
-          allLiEle.forEach((ele) => {
-            ele.classList.remove("bg-teal-300");
-            ele.classList.remove("rounded");
-            ele.classList.remove("h-6");
-          });
-          e.target.parentElement.classList.add("bg-teal-300");
-          e.target.parentElement.classList.add("rounded");
-          e.target.parentElement.classList.add("h-6");
-          // }
+      ele.addEventListener("click", (e) => {
+        console.log(e);
+        // if (e.target.parentElement.classList.contains("bg-teal-300")) {
+        //   e.target.parentElement.classList.remove("bg-teal-300");
+        //   e.target.parentElement.classList.remove("rounded");
+        //   e.target.parentElement.classList.remove("h-6");
+        // } else {
+        const allLiEle = document.querySelectorAll(".news-list li");
+        allLiEle.forEach((ele) => {
+          ele.classList.remove("bg-teal-300");
+          ele.classList.remove("rounded");
+          ele.classList.remove("h-6");
         });
+        e.target.parentElement.classList.add("bg-teal-300");
+        e.target.parentElement.classList.add("rounded");
+        e.target.parentElement.classList.add("h-6");
+        // }
       });
-      console.log(ele, "Lists");
-      const fetchData = async () => {
-        await getCountries();
-      };
-      toggleNavBar.update(true);
-      fetchData();
-      topLoadBar.update(80);
-    },
-    [value]
-  );
+    });
+    console.log(ele, "Lists");
+    const fetchData = async () => {
+      await getCountries();
+      countryData.updateLoad(false);
+    };
+    toggleNavBar.update(true);
+    fetchData();
+    topLoadBar.update(80);
+  }, []);
   topLoadBar.update(100);
 
   async function getCountries() {
@@ -229,51 +229,55 @@ const NewsCards = function ({ category, scrollPosition }) {
   }
   return (
     <>
-      <div className="justify-between mx-auto flex min-h-screen max-w-7xl flex-col relative top-20 custom-scrollbar max-h-full">
-        <div className="mb-auto px-5 py-10 md:py-20 md:px-10 mt-10">
-          <div className="mb-20 flex flex-col gap-10">
-            <div className="flex flex-col gap-3">
-              <ScrolltoTop />
-              <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
-                {countryData.allNewsData.map((ele) => {
-                  // console.log(ele, "got it");
-                  return (
-                    <>
-                      {ele
-                        ? ele.map((eachEle, index) => {
-                            let filteredData = {};
+      {countryData.loaderState ? (
+        <Spinner />
+      ) : (
+        <div className="justify-between mx-auto flex min-h-screen max-w-7xl flex-col relative top-20 custom-scrollbar max-h-full">
+          <div className="mb-auto px-5 py-10 md:py-20 md:px-10 mt-10">
+            <div className="mb-20 flex flex-col gap-10">
+              <div className="flex flex-col gap-3">
+                <ScrolltoTop />
+                <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
+                  {countryData.allNewsData.map((ele) => {
+                    // console.log(ele, "got it");
+                    return (
+                      <>
+                        {ele
+                          ? ele.map((eachEle, index) => {
+                              let filteredData = {};
 
-                            if (
-                              eachEle.title &&
-                              eachEle.author &&
-                              eachEle.urlToImage &&
-                              eachEle.source.name &&
-                              eachEle.url
-                            ) {
-                              filteredData = {
-                                title: eachEle.title,
-                                author: eachEle.author,
-                                content: eachEle.content,
-                                urlToImage: eachEle.urlToImage,
-                                source: eachEle.source.name,
-                                url: eachEle.url,
-                              };
-                            }
-                            return (
-                              <div className="">
-                                <NewsCard data={eachEle} key={index} />
-                              </div>
-                            );
-                          })
-                        : ""}
-                    </>
-                  );
-                })}
+                              if (
+                                eachEle.title &&
+                                eachEle.author &&
+                                eachEle.urlToImage &&
+                                eachEle.source.name &&
+                                eachEle.url
+                              ) {
+                                filteredData = {
+                                  title: eachEle.title,
+                                  author: eachEle.author,
+                                  content: eachEle.content,
+                                  urlToImage: eachEle.urlToImage,
+                                  source: eachEle.source.name,
+                                  url: eachEle.url,
+                                };
+                              }
+                              return (
+                                <div className="">
+                                  <NewsCard data={eachEle} key={index} />
+                                </div>
+                              );
+                            })
+                          : ""}
+                      </>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

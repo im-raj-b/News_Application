@@ -43,8 +43,8 @@ export default function ScrolltoTop() {
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="lucide lucide-move-up"
           >
             <path d="M8 6L12 2L16 6" />

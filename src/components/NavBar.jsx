@@ -135,8 +135,8 @@ export default function NavBar() {
         />
         {toggleNavBar.state && (
           //px-18 py-10
-          <div className="news-navbar-sec flex justify-center content-center">
-            <div className="mb-0 md:px-10 text-white flex flex-nowrap gap-8 fixed justify-center z-10 sm:top-30 w-1/2 sm:news-navbar-width overflow-x-scroll sm:overflow-x-auto top-10">
+          <div className="news-navbar-sec flex justify-center content-center overflow-x-hidden">
+            <div className="mb-0 md:px-10 text-white flex flex-nowrap gap-8 fixed justify-center z-10 sm:top-30 w-1/2 sm:news-navbar-width top-10">
               <nav className="flex md:flex-wrap sm:flex-none sm:justify-between">
                 <Link
                   className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
