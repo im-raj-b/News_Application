@@ -7,7 +7,6 @@ import ActiveRouteState from "./context/states/ActiveRoute";
 import CountryState from "./context/states/CountryState";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <RouterProvider router={router} />
   <BrowserRouter>
     <ActiveRouteState>
       <App />

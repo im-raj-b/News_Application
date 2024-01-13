@@ -7,7 +7,6 @@ import CountryContext from "../context/CountryContext";
 import NavBarContext from "../context/ShowNavBarContext";
 import LoadingBar from "react-top-loading-bar";
 import TopLoadingContext from "../context/TopLoadContext";
-import NavbarSwipe from "./SwipeNavBar";
 import India from "./country/India";
 import China from "./country/China";
 import Usa from "./country/Usa";

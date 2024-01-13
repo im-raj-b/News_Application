@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Tabs from "./Tabs";
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import {
