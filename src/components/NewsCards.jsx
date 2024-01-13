@@ -16,7 +16,6 @@ import Spinner from "./Spinner";
 import Footer from "./Footer";
 
 const NewsCards = function ({ category }) {
-  const [dataNews, setDataNews] = useState([]);
   const toggleNavBar = useContext(NavBarContext);
   const topLoadBar = useContext(TopLoadingContext);
   const countryData = useContext(CountryContext);
@@ -27,7 +26,9 @@ const NewsCards = function ({ category }) {
   let finalArray = [];
   topLoadBar.update(0);
   console.log(toggleNavBar, "toggleNavBar-------");
-
+  document.title = `Suddi-Samachar - ${
+    category.charAt(0).toUpperCase() + category.slice(1)
+  }`;
   useEffect(function () {
     countryData.updateLoad(true);
     const ele = document.querySelectorAll(".news-list li").forEach((ele) => {
