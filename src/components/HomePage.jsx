@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import NavBarContext from "../context/ShowNavBarContext";
 import TopLoadingContext from "../context/TopLoadContext";
 import Typewriter from "typewriter-effect/dist/core";
+import Footer from "./Footer";
 
 export default function HomePage() {
   const toggleNavBar = useContext(NavBarContext);
@@ -63,12 +64,7 @@ export default function HomePage() {
           </p>
         </div>
       </section>
-
-      <footer className="bg-gray-900 text-white py-2 fixed min-w-max w-full bottom-0">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2023 Suddi Samachar</p>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

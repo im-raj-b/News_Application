@@ -113,7 +113,9 @@ export default function CommonNavBar() {
     const navbarEle = document.querySelector(".nw-bar");
 
     dropDownEle.classList.toggle("hidden");
-    navbarEle.classList.remove("hidden");
+    if (navbarEle) {
+      navbarEle.classList.remove("hidden");
+    }
 
     if (path !== "/") {
       const { data } = await supabase

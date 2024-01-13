@@ -1,4 +1,3 @@
-/* @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
 @tailwind base;
 @tailwind components;
@@ -36,19 +35,6 @@
     justify-content: center;
     border-radius: 50%;
   }
-
-  /* @media (min-width: 640px) {
-    .news-sm-modal {
-      margin-top: 40px;
-      @apply absolute z-50 top-[15px] bottom-0 left-0;
-    }
-  } */
-
-  /* .news-list::-webkit-scrollbar {
-    border-radius: 3px;
-    -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.3);
-    background-color: rgb(160, 24, 24);
-  } */
 
   .nw-img {
     width: 36px;
@@ -117,27 +103,12 @@
   .nw-btn {
     margin-top: 80px;
   }
-
-  /* .news-navbar-sec {
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch; 
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-  } */
-
-  /* .news-navbar-sec::-webkit-scrollbar {
-    width: 10px;
-  } */
-
-  /* .news-navbar-sec::-webkit-scrollbar-thumb {
-    background-color: #4a4a4a;
-    border-radius: 5px;
+  .nw-card {
+    border-left: 1px solid;
+    border-top: 1px solid;
+    @apply border-black;
+    background: #fff;
   }
-
-  .news-navbar-sec::-webkit-scrollbar-track {
-    background-color: transparent;
-  } */
 }
 
 @layer base {
@@ -145,6 +116,9 @@
     margin: auto;
     overflow-x: clip;
     font-family: "Inter", sans-serif;
+    /* background-image: linear-gradient(#ebe7f7 1px, transparent 1px),
+      linear-gradient(to right, #ebe7f7 2px, #fff 2px);
+    background-size: 51px 51px; */
   }
   .dark:root {
     --app-container: #1f1d2b;

@@ -13,6 +13,7 @@ import CountryContext from "../context/CountryContext";
 import filterData from "./utility";
 import ScrolltoTop from "./ScrolltoTop";
 import Spinner from "./Spinner";
+import Footer from "./Footer";
 
 const NewsCards = function ({ category }) {
   const [dataNews, setDataNews] = useState([]);
@@ -263,6 +264,7 @@ const NewsCards = function ({ category }) {
           </div>
         </div>
       )}
+      <Footer />
     </>
   );
 };
