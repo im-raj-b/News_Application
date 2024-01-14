@@ -37,19 +37,7 @@ export default function CommonNavBar() {
       } else {
         dropDownEle.classList.add("hidden");
       }
-      // window.addEventListener("click", () => {
-      //   if (dropDownEle.classList.contains("hidden"))
-      //     dropDownEle.classList.toggle("hidden");
-      // });
     }
-
-    // if (!dropDownEle.classList.contains("z-30")) {
-    //   dropDownEle.classList.toggle("z-30");
-    // }
-    // // dropDownEle.classList.toggle("z-30");
-    // if (!navbarEle.classList.contains("z-30")) {
-    //   navbarEle.classList.toggle("z-30");
-    // }
   };
 
   const selectCountry = async (e) => {
@@ -139,7 +127,6 @@ export default function CommonNavBar() {
       <div className="w-screen h-500 flex flex-wrap items-center justify-between content-center p-5 mx-auto max-w-12xl px-2 sm:px-6 lg:px-8 news-navbar">
         <div className="flex left-0 items-center ml-0">
           <Link className="flex items-center" to="/">
-            {/* <img src={news} className="h-8 mr-3" alt="Logo" /> */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

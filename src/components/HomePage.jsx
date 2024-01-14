@@ -14,6 +14,7 @@ export default function HomePage() {
   useEffect(() => {
     topLoader.update(60);
     toggleNavBar.update(false);
+    document.title = `Suddi-Samachar`;
   }, []);
   const showBar = () => {
     toggleNavBar.update(true);

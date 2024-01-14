@@ -1,28 +1,14 @@
-import React, { useState, createContext, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import news from "../assets/news_new.png";
-
-import { createClient } from "@supabase/supabase-js";
-import Switcher from "./DarkModeSwitcher";
-import CountryContext from "../context/CountryContext";
 import NavBarContext from "../context/ShowNavBarContext";
 import LoadingBar from "react-top-loading-bar";
 import TopLoadingContext from "../context/TopLoadContext";
 import NavBar from "./NavBar";
 import CommonNavBar from "./CommonNavBar";
 
-export default function NavigationBar({ countryLogo }) {
-  const countryCon = useContext(CountryContext);
-  const [dataNews, setDataNews] = useState([]);
-  const newsContext = createContext(dataNews);
+export default function NavigationBar() {
   const toggleNavBar = useContext(NavBarContext);
   const topLoader = useContext(TopLoadingContext);
-
-  const supabase = createClient(
-    "https://tctywptybskokqycvohr.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjdHl3cHR5YnNrb2txeWN2b2hyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTAwMTk4MjcsImV4cCI6MjAwNTU5NTgyN30.pC5bLkapBcr5vaN9QcygL0I2ptic-RxHDrLCfuSUYwg"
-  );
-  let finalArray = [];
 
   useEffect(() => {
     document.addEventListener("scroll", (e) => {
@@ -35,20 +21,6 @@ export default function NavigationBar({ countryLogo }) {
       }
     });
   }, []);
-
-  let abbreVation;
-  if (countryCon.state === "IN") {
-    abbreVation = "(IN)";
-  }
-  if (countryCon.state === "CH") {
-    abbreVation = "(CH)";
-  }
-  if (countryCon.state === "US") {
-    abbreVation = "(US)";
-  }
-  if (countryCon.state === "FR") {
-    abbreVation = "(FR)";
-  }
 
   window.mobileCheck = function () {
     let check = false;
@@ -71,12 +43,7 @@ export default function NavigationBar({ countryLogo }) {
   ) : (
     <div className="flex flex-row">
       <CommonNavBar />
-      <LoadingBar
-        color="#f11946"
-        progress={topLoader.state}
-        height={5}
-        // onLoaderFinished={1}
-      />
+      <LoadingBar color="#f11946" progress={topLoader.state} height={5} />
       {toggleNavBar.state && (
         <div className="fixed nw-bar top-20 z-30 nw-margin left-1/2 transform -translate-x-1/2 inline-flex mx-auto justify-between bg-blue-600 w-11/12 rounded-3xl h-50 p-2">
           <div className="news-list overflow-x-scroll overflow-y-hidden scroll-smooth nw-faded-overflow">
@@ -145,74 +112,6 @@ export default function NavigationBar({ countryLogo }) {
           </div>
         </div>
       )}
-      {/* {toggleNavBar.state && (
-        <div className="w-full relative right-0 top-20">
-          <div className="w-full relative right-0 top-10 bg-blue-400">
-            <ul
-              className="relative flex flex-wrap p-1 list-none rounded-lg bg-blue-gray-50/60"
-              data-tabs="tabs"
-              role="list"
-            >
-              <li className="flex-auto text-center">
-                <Link
-                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                  to="/"
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="flex-auto text-center">
-                <Link
-                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                  to="/tech"
-                >
-                  Technology
-                </Link>
-              </li>
-              <li className="flex-auto text-center">
-                <Link
-                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                  to="/science"
-                >
-                  Science
-                </Link>
-              </li>
-              <li className="flex-auto text-center">
-                <Link
-                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                  to="/sports"
-                >
-                  Sports
-                </Link>
-              </li>
-              <li className="flex-auto text-center">
-                <Link
-                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                  to="/business"
-                >
-                  Business
-                </Link>
-              </li>
-              <li className="flex-auto text-center">
-                <Link
-                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                  to="/entertainment"
-                >
-                  Entertainment
-                </Link>
-              </li>
-              <li className="flex-auto text-center">
-                <Link
-                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                  to="/health"
-                >
-                  Health
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 }

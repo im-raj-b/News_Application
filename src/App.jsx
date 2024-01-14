@@ -1,72 +1,38 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import NavBar from "./components/NavBar";
 import { createClient } from "@supabase/supabase-js";
 import NewsCards from "./components/NewsCards";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import About from "./components/About";
 import NavBarState from "./context/states/NavBarState";
-import LoadingBar from "react-top-loading-bar";
 import TopLoadingBar from "./context/states/TopLoadingBar";
-import ActiveRouteState from "./context/states/ActiveRoute";
-import RouteContext from "./context/ActiveRouteContext";
 import NavigationBar from "./components/NavigationBar";
-import NavBarContext from "./context/ShowNavBarContext";
-import CountryContext from "./context/CountryContext";
 import CountryState from "./context/states/CountryState";
-import Spinner from "./components/Spinner";
 
 const supabase = createClient(
   "https://tctywptybskokqycvohr.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjdHl3cHR5YnNrb2txeWN2b2hyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTAwMTk4MjcsImV4cCI6MjAwNTU5NTgyN30.pC5bLkapBcr5vaN9QcygL0I2ptic-RxHDrLCfuSUYwg"
 );
-let finalArray = [];
 function App() {
-  const currentRoute = useContext(NavBarContext);
+  const [count, setCount] = useState(0);
 
-  const activeRoute = useContext(RouteContext);
-  const country = useContext(CountryContext);
   useEffect(function () {
-    // document.addEventListener("click", () => {
-    //   if (country.modalState) {
-    //     const dropDownEle = document.querySelector(".news-country-drop");
-    //     dropDownEle.classList.toggle("hidden");
-    //   }
-    // });
+    // Get the previous count from localStorage
+    const previousCount =
+      parseInt(localStorage.getItem("visitorCount"), 10) || 0;
+    setCount(previousCount + 1);
+
+    // Update the count in localStorage
+    localStorage.setItem("visitorCount", previousCount + 1);
   }, []);
-
-  const routes = [
-    { path: "/", label: "Home" },
-    { path: "/tech", label: "Technology" },
-    { path: "/science", label: "Science" },
-    { path: "/sports", label: "Sports" },
-    { path: "/business", label: "Business" },
-    { path: "/entertainment", label: "Entertainment" },
-    { path: "/health", label: "Health" },
-  ];
-
   return (
     <>
       <TopLoadingBar>
         <CountryState>
           <NavBarState>
-            {/* <NavBar
-              countryLogo={{
-                in: selectIndia,
-                us: selectUsa,
-                ch: selectChina,
-                fr: selectFrance,
-                default: defaultCountry,
-              }}
-            /> */}
             <NavigationBar />
-            {/* <LoadingBar
-              color="#f11946"
-              progress={50}
-              height={2}
-              onLoaderFinished={1}
-            /> */}
+
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<About />} />
@@ -149,13 +115,6 @@ function App() {
           </NavBarState>
         </CountryState>
       </TopLoadingBar>
-
-      {/* <img
-          src="https://www.gstatic.com/youtube/img/promos/growth/ddf13c1c1c7a76c5e367063489ca4a6ace2fef8adc8597726b4ec2e46e34151f_129x56.webp"
-          alt=""
-        /> */}
-      {/* </div>
-      )} */}
     </>
   );
 }

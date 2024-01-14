@@ -16,12 +16,6 @@ const NewsCard = function ({ data, scrollPosition }) {
           delayTime={5000}
           scrollPosition={scrollPosition}
         />
-        {/* <img
-          className="rounded-t-lg"
-          src={data.urlToImage}
-          alt=""
-          loading="lazy"
-        /> */}
       </span>
 
       <div className="flex flex-col pr-1">
