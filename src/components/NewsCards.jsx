@@ -34,11 +34,11 @@ const NewsCards = function ({ category }) {
       ele.addEventListener("click", (e) => {
         const allLiEle = document.querySelectorAll(".news-list li");
         allLiEle.forEach((ele) => {
-          ele.classList.remove("bg-teal-300");
+          ele.classList.remove("bg-gray-300");
           ele.classList.remove("rounded");
           ele.classList.remove("h-6");
         });
-        e.target.parentElement.classList.add("bg-teal-300");
+        e.target.parentElement.classList.add("bg-gray-300");
         e.target.parentElement.classList.add("rounded");
         e.target.parentElement.classList.add("h-6");
       });

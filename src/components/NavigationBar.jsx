@@ -54,23 +54,20 @@ export default function NavigationBar() {
             >
               <li className="flex-auto text-center">
                 <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500 rounded-sm"
+                  className="px-4 py-2 text-black font-semibold rounded-sm"
                   to="/"
                 >
                   Home
                 </Link>
               </li>
               <li className="flex-auto text-center">
-                <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500 "
-                  to="/tech"
-                >
+                <Link className="px-4 py-2 text-black font-semibold" to="/tech">
                   Technology
                 </Link>
               </li>
               <li className="flex-auto text-center">
                 <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
+                  className="px-4 py-2 text-black font-semibold"
                   to="/health"
                 >
                   Health
@@ -78,7 +75,7 @@ export default function NavigationBar() {
               </li>
               <li className="flex-auto text-center">
                 <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
+                  className="px-4 py-2 text-black font-semibold"
                   to="/science"
                 >
                   Science
@@ -86,7 +83,7 @@ export default function NavigationBar() {
               </li>
               <li className="flex-auto text-center">
                 <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
+                  className="px-4 py-2 text-black font-semibold"
                   to="/sports"
                 >
                   Sports
@@ -94,7 +91,7 @@ export default function NavigationBar() {
               </li>
               <li className="flex-auto text-center">
                 <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
+                  className="px-4 py-2 text-black font-semibold"
                   to="/business"
                 >
                   Business
@@ -102,7 +99,7 @@ export default function NavigationBar() {
               </li>
               <li className="flex-auto text-center">
                 <Link
-                  className="px-4 py-2 text-black font-semibold hover:text-yellow-500"
+                  className="px-4 py-2 text-black font-semibold"
                   to="/entertainment"
                 >
                   Entertainment
