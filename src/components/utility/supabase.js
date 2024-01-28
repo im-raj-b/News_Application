@@ -23,7 +23,7 @@ export async function fetchDataFromSupabase(category, tableName) {
 }
 
 // Function to perform another Supabase operation
-export async function getVisitors() {
+export async function updateVisitors() {
   // Your Supabase operation here
   try {
     // Fetch current count
@@ -34,7 +34,7 @@ export async function getVisitors() {
       return;
     }
 
-    const currentCount = data[0]?.count || 0;
+    const currentCount = data[0]?.news_app || 0;
 
     // Increment count
     const newCount = currentCount + 1;

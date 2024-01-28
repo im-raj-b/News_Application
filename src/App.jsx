@@ -9,18 +9,12 @@ import NavBarState from "./context/states/NavBarState";
 import TopLoadingBar from "./context/states/TopLoadingBar";
 import NavigationBar from "./components/NavigationBar";
 import CountryState from "./context/states/CountryState";
-import { getVisitors } from "./components/utility/supabase";
+import { updateVisitors } from "./components/utility/supabase";
 function App() {
   const [count, setCount] = useState(0);
 
   useEffect(function () {
-    // Get the previous count from localStorage
-    const previousCount =
-      parseInt(localStorage.getItem("visitorCount"), 10) || 0;
-    setCount(previousCount + 1);
-
-    // Update the count in localStorage
-    localStorage.setItem("visitorCount", previousCount + 1);
+    updateVisitors();
   }, []);
   return (
     <>
