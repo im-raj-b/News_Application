@@ -7,19 +7,12 @@ import China from "./country/China";
 import Usa from "./country/Usa";
 import France from "./country/France";
 import { useState, useContext } from "react";
-import { createClient } from "@supabase/supabase-js";
-import filterData from "./utility";
+import filterData from "./utility/utility";
+import { fetchDataFromSupabase } from "./utility/supabase";
 
 export default function CommonNavBar() {
   const countryCon = useContext(CountryContext);
   const location = useLocation();
-  const supabase = createClient(
-    "https://tctywptybskokqycvohr.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjdHl3cHR5YnNrb2txeWN2b2hyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTAwMTk4MjcsImV4cCI6MjAwNTU5NTgyN30.pC5bLkapBcr5vaN9QcygL0I2ptic-RxHDrLCfuSUYwg"
-  );
-
-  let finalArray = [];
-
   const changeCountry = (e) => {
     const dropDownEle = document.querySelector(".news-country-drop");
     const navbarEle = document.querySelector(".nw-bar");
@@ -106,17 +99,11 @@ export default function CommonNavBar() {
     }
 
     if (path !== "/") {
-      const { data } = await supabase
-        .from(tableName)
-        .select(currentColumn)
-        .not(currentColumn, "is", null);
-
-      data.forEach((ele) => {
-        if (ele[currentColumn]) {
-          finalArray.push(ele[currentColumn]);
-        }
-      });
-      const filteredData = filterData(finalArray);
+      const supabaseData = await fetchDataFromSupabase(
+        currentColumn,
+        tableName
+      );
+      const filteredData = await filterData(supabaseData, currentColumn);
       countryCon.setData(filteredData);
       countryCon.updateLoad(false);
     }

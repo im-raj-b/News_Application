@@ -1,26 +1,21 @@
 import React, { useContext } from "react";
 import { useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
 import { trackWindowScroll } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import NewsCard from "./NewsCard";
 import NavBarContext from "../context/ShowNavBarContext";
 import TopLoadingContext from "../context/TopLoadContext";
 import CountryContext from "../context/CountryContext";
-import filterData from "./utility";
+import filterData from "./utility/utility";
 import ScrolltoTop from "./ScrolltoTop";
 import Spinner from "./Spinner";
 import Footer from "./Footer";
+import { fetchDataFromSupabase } from "./utility/supabase";
 
 const NewsCards = function ({ category }) {
   const toggleNavBar = useContext(NavBarContext);
   const topLoadBar = useContext(TopLoadingContext);
   const countryData = useContext(CountryContext);
-  const supabase = createClient(
-    "https://tctywptybskokqycvohr.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjdHl3cHR5YnNrb2txeWN2b2hyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTAwMTk4MjcsImV4cCI6MjAwNTU5NTgyN30.pC5bLkapBcr5vaN9QcygL0I2ptic-RxHDrLCfuSUYwg"
-  );
-  let finalArray = [];
   topLoadBar.update(0);
   console.log(toggleNavBar, "toggleNavBar-------");
   document.title = `Suddi-Samachar - ${
@@ -50,7 +45,14 @@ const NewsCards = function ({ category }) {
     };
     toggleNavBar.update(true);
     fetchData();
+
+    // const interval = setInterval(() => {
+    //   fetchData();
+    // }, 5000);
     topLoadBar.update(80);
+    // return () => {
+    //   clearInterval(interval);
+    // };
   }, []);
   topLoadBar.update(100);
 
@@ -68,147 +70,52 @@ const NewsCards = function ({ category }) {
       tableName = "China_duplicate";
     }
     if (category.toLowerCase() === "general") {
-      const { data } = await supabase
-        .from(tableName)
-        .select("general")
-        .not("general", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.general) {
-          finalArray.push(ele.general);
-        }
-      });
-      const filteredData = filterData(finalArray);
+      const supabaseData = await fetchDataFromSupabase(category, tableName);
+      const filteredData = await filterData(supabaseData, category);
       countryData.setData(filteredData);
       return;
     }
     if (category.toLowerCase() === "science") {
-      const { data } = await supabase
-        .from(tableName)
-        .select("science")
-        .not("science", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.science) {
-          finalArray.push(ele.science);
-        }
-      });
-      const filteredData = filterData(finalArray);
+      const supabaseData = await fetchDataFromSupabase(category, tableName);
+      const filteredData = await filterData(supabaseData, category);
       countryData.setData(filteredData);
 
       return;
     }
     if (category.toLowerCase() === "sports") {
-      const { data } = await supabase
-        .from(tableName)
-        .select("sports")
-        .not("sports", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.sports) {
-          finalArray.push(ele.sports);
-        }
-      });
-      const filteredData = filterData(finalArray);
+      const supabaseData = await fetchDataFromSupabase(category, tableName);
+      const filteredData = await filterData(supabaseData, category);
       countryData.setData(filteredData);
 
       return;
     }
     if (category.toLowerCase() === "entertainment") {
-      const { data } = await supabase
-        .from(tableName)
-        .select("entertainment")
-        .not("entertainment", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.entertainment) {
-          finalArray.push(ele.entertainment);
-        }
-      });
-      const filteredData = filterData(finalArray);
+      const supabaseData = await fetchDataFromSupabase(category, tableName);
+      const filteredData = await filterData(supabaseData, category);
       countryData.setData(filteredData);
 
       return;
     }
     if (category.toLowerCase() === "business") {
-      const { data } = await supabase
-        .from(tableName)
-        .select("business")
-        .not("business", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.business) {
-          finalArray.push(ele.business);
-        }
-      });
-      const filteredData = filterData(finalArray);
+      const supabaseData = await fetchDataFromSupabase(category, tableName);
+      const filteredData = await filterData(supabaseData, category);
       countryData.setData(filteredData);
 
       return;
     }
     if (category.toLowerCase() === "health") {
-      const { data } = await supabase
-        .from(tableName)
-        .select("health")
-        .not("health", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.health) {
-          finalArray.push(ele.health);
-        }
-      });
-      const filteredData = filterData(finalArray);
+      const supabaseData = await fetchDataFromSupabase(category, tableName);
+      const filteredData = await filterData(supabaseData, category);
       countryData.setData(filteredData);
 
       return;
     }
     if (category.toLowerCase() === "technology") {
-      const { data } = await supabase
-        .from(tableName)
-        .select("technology")
-        .not("technology", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.technology) {
-          finalArray.push(ele.technology);
-        }
-      });
-      const filteredData = filterData(finalArray);
+      const supabaseData = await fetchDataFromSupabase(category, tableName);
+      const filteredData = await filterData(supabaseData, category);
       countryData.setData(filteredData);
 
       return;
-    } else {
-      const { data } = await supabase
-        .from("NewsData")
-        .select("dataUS")
-        .not("dataUS", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.dataUS) {
-          finalArray.push(ele.dataUS);
-        }
-      });
-      const filteredData = filterData(finalArray);
-      countryData.setData(filteredData);
-
-      return;
-    }
-  }
-
-  async function getTech() {
-    console.log("tech");
-    if (category.toLowerCase() === "technology") {
-      const { data } = await supabase
-        .from("India_duplicate")
-        .select("technology")
-        .not("technology", "is", null);
-
-      data.forEach((ele) => {
-        if (ele.technology) {
-          finalArray.push(ele.technology);
-        }
-      });
-      setDataNews(finalArray);
     }
   }
   return (

@@ -9,11 +9,7 @@ import NavBarState from "./context/states/NavBarState";
 import TopLoadingBar from "./context/states/TopLoadingBar";
 import NavigationBar from "./components/NavigationBar";
 import CountryState from "./context/states/CountryState";
-
-const supabase = createClient(
-  "https://tctywptybskokqycvohr.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjdHl3cHR5YnNrb2txeWN2b2hyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTAwMTk4MjcsImV4cCI6MjAwNTU5NTgyN30.pC5bLkapBcr5vaN9QcygL0I2ptic-RxHDrLCfuSUYwg"
-);
+import { getVisitors } from "./components/utility/supabase";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -32,7 +28,6 @@ function App() {
         <CountryState>
           <NavBarState>
             <NavigationBar />
-
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<About />} />

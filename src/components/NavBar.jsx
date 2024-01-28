@@ -33,6 +33,12 @@ export default function NavBar() {
                 </Link>
                 <Link
                   className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
+                  to="/health"
+                >
+                  Health
+                </Link>
+                <Link
+                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
                   to="/science"
                 >
                   Science
@@ -57,13 +63,6 @@ export default function NavBar() {
                   to="/entertainment"
                 >
                   Entertainment
-                </Link>
-
-                <Link
-                  className="px-4 py-2 text-blue-500 font-semibold hover:text-blue-700"
-                  to="/health"
-                >
-                  Health
                 </Link>
               </nav>
             </div>
