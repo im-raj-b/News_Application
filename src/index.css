@@ -109,6 +109,12 @@
     @apply border-black;
     background: #fff;
   }
+
+  .news-message-container {
+    @apply text-black  dark:text-white;
+    width: max-content;
+    height: max-content;
+  }
 }
 
 @layer base {

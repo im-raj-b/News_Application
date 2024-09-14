@@ -11,6 +11,7 @@ import ScrolltoTop from "./ScrolltoTop";
 import Spinner from "./Spinner";
 import Footer from "./Footer";
 import { fetchDataFromSupabase } from "./utility/supabase";
+import Message from "./Message";
 
 const NewsCards = function ({ category }) {
   const toggleNavBar = useContext(NavBarContext);
@@ -129,40 +130,44 @@ const NewsCards = function ({ category }) {
               <div className="flex flex-col gap-3">
                 <ScrolltoTop />
                 <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
-                  {countryData.allNewsData.map((ele) => {
-                    // console.log(ele, "got it");
-                    return (
-                      <>
-                        {ele
-                          ? ele.map((eachEle, index) => {
-                              let filteredData = {};
+                  {countryData.allNewsData[0].length ? (
+                    countryData.allNewsData.map((ele) => {
+                      // console.log(ele, "got it");
+                      return (
+                        <>
+                          {ele
+                            ? ele.map((eachEle, index) => {
+                                let filteredData = {};
 
-                              if (
-                                eachEle.title &&
-                                eachEle.author &&
-                                eachEle.urlToImage &&
-                                eachEle.source.name &&
-                                eachEle.url
-                              ) {
-                                filteredData = {
-                                  title: eachEle.title,
-                                  author: eachEle.author,
-                                  content: eachEle.content,
-                                  urlToImage: eachEle.urlToImage,
-                                  source: eachEle.source.name,
-                                  url: eachEle.url,
-                                };
-                              }
-                              return (
-                                <div className="">
-                                  <NewsCard data={eachEle} key={index} />
-                                </div>
-                              );
-                            })
-                          : ""}
-                      </>
-                    );
-                  })}
+                                if (
+                                  eachEle.title &&
+                                  eachEle.author &&
+                                  eachEle.urlToImage &&
+                                  eachEle.source.name &&
+                                  eachEle.url
+                                ) {
+                                  filteredData = {
+                                    title: eachEle.title,
+                                    author: eachEle.author,
+                                    content: eachEle.content,
+                                    urlToImage: eachEle.urlToImage,
+                                    source: eachEle.source.name,
+                                    url: eachEle.url,
+                                  };
+                                }
+                                return (
+                                  <div className="">
+                                    <NewsCard data={eachEle} key={index} />
+                                  </div>
+                                );
+                              })
+                            : ""}
+                        </>
+                      );
+                    })
+                  ) : (
+                    <Message />
+                  )}
                 </div>
               </div>
             </div>
