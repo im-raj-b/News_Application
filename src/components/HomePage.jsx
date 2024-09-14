@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import NavBarContext from "../context/ShowNavBarContext";
 import TopLoadingContext from "../context/TopLoadContext";
 import Typewriter from "typewriter-effect/dist/core";
@@ -8,6 +8,7 @@ import Footer from "./Footer";
 export default function HomePage() {
   const toggleNavBar = useContext(NavBarContext);
   const topLoader = useContext(TopLoadingContext);
+  const navigate = useNavigate();
 
   topLoader.update(0);
   topLoader.update(40);
@@ -22,6 +23,7 @@ export default function HomePage() {
     if (!dropDownEle.classList.contains("hidden")) {
       dropDownEle.classList.toggle("hidden");
     }
+    navigate("/main");
   };
   topLoader.update(100);
 
@@ -50,7 +52,7 @@ export default function HomePage() {
           onClick={showBar}
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 mt-8 rounded-full"
         >
-          <Link to="/main">Fetch News</Link>
+          Fetch News
         </button>
       </div>
       <section className="py-20 min-w-fit">
