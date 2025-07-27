@@ -6,7 +6,6 @@ const filterData = async (data, category) => {
       }
     });
   });
-  console.log(result);
   return result;
 };
 

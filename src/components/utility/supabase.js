@@ -9,14 +9,12 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // Function to fetch data from Supabase
 export async function fetchDataFromSupabase(category, tableName) {
   // Your Supabase query or operation here
-  console.log(category);
   const { data } = await supabase
     .from(tableName)
     .select(category)
     .not(category, "is", null);
 
   const resultData = data.filter((ele) => ele[category]);
-  console.log(resultData);
   // Return the result
   // return { data, error };
   return resultData;
@@ -49,8 +47,6 @@ export async function updateVisitors() {
       console.error("Error updating visitor count:", updateError.message);
       return;
     }
-
-    console.log(`Visitor count: ${newCount}`);
   } catch (error) {
     console.error("Error:", error.message);
   }

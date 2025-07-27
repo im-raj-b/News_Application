@@ -18,15 +18,12 @@ const NewsCards = function ({ category }) {
   const topLoadBar = useContext(TopLoadingContext);
   const countryData = useContext(CountryContext);
   topLoadBar.update(0);
-  console.log(toggleNavBar, "toggleNavBar-------");
   document.title = `Suddi-Samachar - ${
     category.charAt(0).toUpperCase() + category.slice(1)
   }`;
   useEffect(function () {
     countryData.updateLoad(true);
     const ele = document.querySelectorAll(".news-list li").forEach((ele) => {
-      console.log(ele, "elements");
-
       ele.addEventListener("click", (e) => {
         const allLiEle = document.querySelectorAll(".news-list li");
         allLiEle.forEach((ele) => {
@@ -39,7 +36,6 @@ const NewsCards = function ({ category }) {
         e.target.parentElement.classList.add("h-6");
       });
     });
-    console.log(ele, "Lists");
     const fetchData = async () => {
       await getCountries();
       countryData.updateLoad(false);
@@ -123,56 +119,53 @@ const NewsCards = function ({ category }) {
     <>
       {countryData.loaderState ? (
         <Spinner />
-      ) : (
+      ) : countryData?.allNewsData[0]?.length ? (
         <div className="justify-between mx-auto flex min-h-screen max-w-7xl flex-col relative top-20 custom-scrollbar max-h-full">
           <div className="mb-auto px-5 py-10 md:py-20 md:px-10 mt-10">
             <div className="mb-20 flex flex-col gap-10">
               <div className="flex flex-col gap-3">
                 <ScrolltoTop />
                 <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
-                  {countryData.allNewsData[0].length ? (
-                    countryData.allNewsData.map((ele) => {
-                      // console.log(ele, "got it");
-                      return (
-                        <>
-                          {ele
-                            ? ele.map((eachEle, index) => {
-                                let filteredData = {};
+                  {countryData.allNewsData.map((ele) => {
+                    return (
+                      <>
+                        {ele
+                          ? ele.map((eachEle, index) => {
+                              let filteredData = {};
 
-                                if (
-                                  eachEle.title &&
-                                  eachEle.author &&
-                                  eachEle.urlToImage &&
-                                  eachEle.source.name &&
-                                  eachEle.url
-                                ) {
-                                  filteredData = {
-                                    title: eachEle.title,
-                                    author: eachEle.author,
-                                    content: eachEle.content,
-                                    urlToImage: eachEle.urlToImage,
-                                    source: eachEle.source.name,
-                                    url: eachEle.url,
-                                  };
-                                }
-                                return (
-                                  <div className="">
-                                    <NewsCard data={eachEle} key={index} />
-                                  </div>
-                                );
-                              })
-                            : ""}
-                        </>
-                      );
-                    })
-                  ) : (
-                    <Message />
-                  )}
+                              if (
+                                eachEle.title &&
+                                eachEle.author &&
+                                eachEle.urlToImage &&
+                                eachEle.source.name &&
+                                eachEle.url
+                              ) {
+                                filteredData = {
+                                  title: eachEle.title,
+                                  author: eachEle.author,
+                                  content: eachEle.content,
+                                  urlToImage: eachEle.urlToImage,
+                                  source: eachEle.source.name,
+                                  url: eachEle.url,
+                                };
+                              }
+                              return (
+                                <div className="">
+                                  <NewsCard data={eachEle} key={index} />
+                                </div>
+                              );
+                            })
+                          : ""}
+                      </>
+                    );
+                  })}
                 </div>
               </div>
             </div>
           </div>
         </div>
+      ) : (
+        <Message />
       )}
       <Footer />
     </>

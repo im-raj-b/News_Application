@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 // Load environment variables from the appropriate .env file
 const env = dotenv.config({ path: `.env` }).parsed;
 
-console.log(env);
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
